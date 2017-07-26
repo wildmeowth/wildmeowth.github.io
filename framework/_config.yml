@@ -1,0 +1,50 @@
+# Basic
+title: Wild Meowth
+subtitle: 吃吃喝喝，喝喝吃吃
+welcome_message: <a href="https://github.com/onevcat/vno-jekyll" target="_blank">Download the theme</a>
+description: 嗨，我是野猫(@WildMeowth)，一名天朝的代码搬运工。现居杭州，在杭州工作。目前处于学习状态。
+creator: <a href="http://WildMeowth.github.io">@WildMeowth</a>
+
+url: "http:///WildMeowth.github.io"
+
+permalink: /:year/:month/:title/
+
+# Format
+highlighter: rouge
+
+# supported colors: blue, green, purple, red, orange or slate. If you need clear, leave it empty.
+cover_color: blue
+
+# The blog button should not be removed.
+blog_button:
+    title: 博客
+    description: 访问博客
+
+# Navigation buttons in the front page.
+nav:
+    - {title: 简历, description: My Prfiles, url: '/'}
+    - {title: 关于, description: About me, url: '/'}
+    - {title: 订阅, description: subscribe, url: '/'}
+
+# Pagination
+gems: [jekyll-paginate]
+paginate: 10
+paginate_path: "page/:num/"
+
+# Comment
+comment:
+    disqus: WildMeowth
+    # duoshuo: 
+    
+# Social
+social:
+    weibo: 一匹野猫
+    github: WildMeowth
+    twitter: WildMeowth
+    #gplus: 107108267983477358170
+    mail: sddzok@163.com
+
+# Google Analytics
+ga:
+    # id: your_ga_id
+    # host: your_host
