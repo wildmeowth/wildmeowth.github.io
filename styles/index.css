@@ -106,10 +106,11 @@ article {
     position: absolute;
     top: 90%;
     left: 48%;
-    webkit-animation: bounce-down 1.5s linear infinite;
     animation: bounce-down 1.5s linear infinite;
+    -webkit-animation: bounce-down 1.5s linear infinite;
     text-align: center;
     color: white;
+    cursor: pointer;
 }
 
 /** 箭头 start */
@@ -120,12 +121,12 @@ article {
     display: inline-block;
     height: 8px;
     width: 8px;
-    border-width: 2px 2px 0 0;
+    border-width: 2px 2px 0px 0px;
     border-color: #c8c8cd;
     border-style: solid;
     position: relative;
 }
-.li-arrow-top {
+.li-arrow-right {
     -webkit-transform: rotate(-45deg);
     transform: rotate(-45deg);
     margin-left: .23rem;
