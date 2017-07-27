@@ -10,5 +10,5 @@ date: 2017-07-26 15:32:24.000000000 +08:00
 
 #### 声明和鸣谢
 
-本站使用了**'Vno Jekyll'** 的主题，它的源代码可以在 [Vno Jekyll](https://github.com/onevcat/vno-jekyll) 上找到，它最初的版本来自于 [Dale Anthony's Uno](https://github.com/daleanthony/uno).
+本站使用了**'Vno Jekyll'** 的主题，<!--它的源代码可以在 [Vno Jekyll](https://github.com/onevcat/vno-jekyll) 上找到，-->它最初的版本来自于 [Dale Anthony's Uno]<!--(https://github.com/daleanthony/uno)-->.
 
