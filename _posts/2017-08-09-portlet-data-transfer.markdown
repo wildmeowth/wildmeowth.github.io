@@ -89,6 +89,7 @@ for example:
 Portlet A 中：
 String data = "Don't worry, be happy!";
 PortletSession session = request.getPortletSession().setAttribute("data", data, PortletSession.APPLICATION_SCOPE);
+```
 
 Portlet B 中：
 ```
