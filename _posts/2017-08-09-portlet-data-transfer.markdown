@@ -85,8 +85,8 @@ public void render(RenderRequest renderRequest,
 PortletSession在应用级即PortletSession.APPLICATION_SCOPE，可以在多个portlet间进行数据共享。
 
 for example:
-```
 Portlet A 中：
+```
 String data = "Don't worry, be happy!";
 PortletSession session = request.getPortletSession().setAttribute("data", data, PortletSession.APPLICATION_SCOPE);
 ```
