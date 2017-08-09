@@ -16,7 +16,7 @@ date: 2017-08-09 16:43:31.000000000 +08:00
 
 ### 1.共享呈现参数
 
-对于共享呈现参数定义的声明必须在 portlet.xml 部署文件中使用 <public-render-parameter> 关键字，该元素与 <portlet> 元素并列为 <portlet-app> 的分支。
+对于共享呈现参数需要在 portlet.xml 部署文件中的<portlet-app>中使用 <public-render-parameter> 标签。
 
 for example:
 ```
@@ -27,44 +27,44 @@ for example:
     </portlet>
     ...
 	<public-render-parameter>
-        <identifier>public-render-param1</identifier>
-        <qname xmlns:x="http://sun.com/params">x:public-render-param1</qname>
+        <identifier>param1</identifier>
+        <qname xmlns:x="http://sun.com/params">x:param1</qname>
     </public-render-parameter>
     <public-render-parameter>
-        <identifier>public-render-param2</identifier>
-        <qname xmlns:x="http://sun.com/params">x:public-render-param2</qname>
+        <identifier>param2</identifier>
+        <qname xmlns:x="http://sun.com/params">x:param2</qname>
     </public-render-parameter>
 </portlet-app>
 ```
 
-支持共享呈现参数 Portlet 声明：对于支持共享呈现参数的 Portlet 的声明需要在 portlet.xml 中 <portlet> 元素中使用 <supported-public-render-parameter> 关键字。
+然后在每个 <portlet> 中使用 <supported-public-render-parameter> 标签。
 
 for example:
 ```
 <portlet>
     <portlet-name>Portlet B</portle-name>
     ......
-    <supported-public-render-parameter>public-render-param1</supported-public-render-parameter>
+    <supported-public-render-parameter>param1</supported-public-render-parameter>
 </portlet>    
  
 <portlet>
     <portlet-name>Portlet C</portle-name>
     ......
-    <supported-public-render-parameter>public-render-param2</supported-public-render-parameter>
+    <supported-public-render-parameter>param2</supported-public-render-parameter>
 </portlet>
 ```
 
 
 共享呈现参数的使用
-与非共享呈现参数的使用方法相同，共享呈现参数可以通过 ActionResponse 的 setRenderParameter("标识","值") 方法设定，并通过 RenderRequest 的 getParameter("标识") 来获得。
+与非共享呈现参数的使用方法相同，共享呈现参数可以通过 ActionResponse 的 setRenderParameter("key","value") 方法设定，并通过 RenderRequest 的 getParameter("key") 来获得。
 
 for example:
 Portlet A 设定共享呈现参数
 ```
 public void processAction(ActionRequest actionRequest,
         ActionResponse actionResponse) throws PortletException, IOException {
-    String publicRenderParamValue1 = actionRequest.getParameter("public-render-param1");
-    actionResponse.setRenderParameter("public-render-param1", publicRenderParamValue1);
+    String publicValue = actionRequest.getParameter("param1");
+    actionResponse.setRenderParameter("param1", publicParam);
 }
 ```
 
@@ -73,7 +73,7 @@ Portlet B 获取共享呈现参数
 public void render(RenderRequest renderRequest,
         renderResponse renderResponse) throws PortletException, IOException {
     ...
-    String publicRenderParamValue1 = renderRequest.getParameter("public-render-param1")；
+    String publicValue = renderRequest.getParameter("param1")；
     ...
 }
 ```
