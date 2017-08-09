@@ -58,7 +58,7 @@ for example:
 共享呈现参数的使用
 与非共享呈现参数的使用方法相同，共享呈现参数可以通过 ActionResponse 的 setRenderParameter("key","value") 方法设定，并通过 RenderRequest 的 getParameter("key") 来获得。
 
-for example:
+for example:<br>
 Portlet A 设定共享呈现参数
 ```
 public void processAction(ActionRequest actionRequest,
@@ -84,7 +84,7 @@ public void render(RenderRequest renderRequest,
 
 PortletSession在应用级即PortletSession.APPLICATION_SCOPE，可以在多个portlet间进行数据共享。
 
-for example:
+for example:<br>
 Portlet A 中：
 ```
 String data = "Don't worry, be happy!";
