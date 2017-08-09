@@ -12,9 +12,9 @@ date: 2017-08-09 16:43:31.000000000 +08:00
 
 本文主要介绍IBM websphere portal中多个portlet间的数据交互。博主仅介绍其中两种。
 
-##正文
+## 正文
 
-###1.共享呈现参数
+### 1.共享呈现参数
 
 对于共享呈现参数定义的声明必须在 portlet.xml 部署文件中使用 <public-render-parameter> 关键字，该元素与 <portlet> 元素并列为 <portlet-app> 的分支。
 
@@ -80,7 +80,7 @@ public void render(RenderRequest renderRequest,
 
 以上DONE。
 
-###2.PortletSession
+### 2.PortletSession
 
 PortletSession在应用级即PortletSession.APPLICATION_SCOPE，可以在多个portlet间进行数据共享。
 
