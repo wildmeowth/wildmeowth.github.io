@@ -1,6 +1,6 @@
 ---
 layout: post
-title: websphere portlet间数据传递 - 野猫
+title: Websphere portlet间数据传递 - 野猫
 date: 2017-08-09 16:43:31.000000000 +08:00
 ---
 
@@ -10,7 +10,7 @@ date: 2017-08-09 16:43:31.000000000 +08:00
 
 ## 摘要
 
-本文主要介绍IBM websphere portal中多个portlet间的数据交互。博主仅介绍其中两种。
+本文主要介绍IBM Websphere Portal中多个portlet间的数据交互。本文仅介绍其中两种。
 
 ## 正文
 
@@ -18,7 +18,7 @@ date: 2017-08-09 16:43:31.000000000 +08:00
 
 对于共享呈现参数需要在 portlet.xml 部署文件中的```<portlet-app>```中使用 ```<public-render-parameter>``` 标签。
 
-for example:
+For example:
 ```
 <portlet-app ...>
     <portlet>
@@ -39,7 +39,7 @@ for example:
 
 然后在每个 ```<portlet>``` 中使用 ```<supported-public-render-parameter>``` 标签。
 
-for example:
+For example:
 ```
 <portlet>
     <portlet-name>Portlet B</portle-name>
@@ -58,7 +58,7 @@ for example:
 共享呈现参数的使用
 与非共享呈现参数的使用方法相同，共享呈现参数可以通过 ActionResponse 的 setRenderParameter("key","value") 方法设定，并通过 RenderRequest 的 getParameter("key") 来获得。
 
-for example:
+For example:
 
 Portlet A 设定共享呈现参数
 ```
@@ -85,7 +85,7 @@ public void render(RenderRequest renderRequest,
 
 PortletSession在应用级即PortletSession.APPLICATION_SCOPE，可以在多个portlet间进行数据共享。
 
-for example:
+For example:
 
 Portlet A 中：
 ```
