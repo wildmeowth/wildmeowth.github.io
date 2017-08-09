@@ -16,7 +16,7 @@ date: 2017-08-09 16:43:31.000000000 +08:00
 
 ### 1.共享呈现参数
 
-对于共享呈现参数需要在 portlet.xml 部署文件中的<portlet-app>中使用 <public-render-parameter> 标签。
+对于共享呈现参数需要在 portlet.xml 部署文件中的```<portlet-app>```中使用 ```<public-render-parameter>``` 标签。
 
 for example:
 ```
@@ -37,7 +37,7 @@ for example:
 </portlet-app>
 ```
 
-然后在每个 <portlet> 中使用 <supported-public-render-parameter> 标签。
+然后在每个 ```<portlet>``` 中使用 ```<supported-public-render-parameter>``` 标签。
 
 for example:
 ```
