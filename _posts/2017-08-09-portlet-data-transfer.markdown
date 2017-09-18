@@ -28,11 +28,11 @@ For example:
     ...
 	<public-render-parameter>
         <identifier>param1</identifier>
-        <qname xmlns:x="http://sun.com/params">x:param1</qname>
+        <name>param1</qname>
     </public-render-parameter>
     <public-render-parameter>
         <identifier>param2</identifier>
-        <qname xmlns:x="http://sun.com/params">x:param2</qname>
+        <name>param2</name>
     </public-render-parameter>
 </portlet-app>
 ```
@@ -42,15 +42,15 @@ For example:
 For example:
 ```
 <portlet>
-    <portlet-name>Portlet B</portle-name>
+    <portlet-name>Portlet A</portle-name>
     ......
     <supported-public-render-parameter>param1</supported-public-render-parameter>
 </portlet>    
  
 <portlet>
-    <portlet-name>Portlet C</portle-name>
+    <portlet-name>Portlet B</portle-name>
     ......
-    <supported-public-render-parameter>param2</supported-public-render-parameter>
+    <supported-public-render-parameter>param1</supported-public-render-parameter>
 </portlet>
 ```
 
@@ -64,8 +64,9 @@ Portlet A 设定共享呈现参数
 ```
 public void processAction(ActionRequest actionRequest,
         ActionResponse actionResponse) throws PortletException, IOException {
-    String publicValue = actionRequest.getParameter("param1");
+    ...
     actionResponse.setRenderParameter("param1", publicParam);
+    ...
 }
 ```
 
@@ -74,7 +75,7 @@ Portlet B 获取共享呈现参数
 public void render(RenderRequest renderRequest,
         renderResponse renderResponse) throws PortletException, IOException {
     ...
-    String publicValue = renderRequest.getParameter("param1")；
+    String publicValue = renderRequest.getParameter("param1");
     ...
 }
 ```
