@@ -5,7 +5,7 @@ subtitle: 吃吃喝喝，喝喝吃吃
 description: 嗨，我是野猫(@WildMeowth)，一名天朝的代码搬运工。现居杭州，在杭州工作。目前处于学习状态。
 creator: <a href="http://WildMeowth.github.io">@WildMeowth</a>
 
-url: "http:///WildMeowth.github.io"
+url: "http://WildMeowth.github.io"
 
 permalink: /:year/:month/:title/
 
@@ -22,7 +22,7 @@ blog_button:
 
 # Navigation buttons in the front page.
 nav:
-    - {title: 简历, description: My Prfiles, url: '/'}
+    - {title: 简历, description: My Prfiles, url: '/nav/profile.html'}
     - {title: 关于, description: About me, url: '/'}
     - {title: 订阅, description: subscribe, url: '/'}
 
