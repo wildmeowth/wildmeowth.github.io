@@ -2,6 +2,7 @@
 layout: post
 title: Hello World - 野猫
 date: 2017-07-27 15:32:24.000000000 +08:00
+tags: WildMeowth , 博客
 ---
 
 ## 博客诞生

@@ -2,6 +2,7 @@
 layout: post
 title: Websphere portlet间数据传递 - 野猫
 date: 2017-08-09 16:43:31.000000000 +08:00
+tags: webshpere portal , portlet数据传递
 ---
 
 >版权声明：本文为 @WildMeowth
