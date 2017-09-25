@@ -63,6 +63,8 @@ Spring 3 MVC Portlet 所需要的jar包可以去[spring官网](https://github.co
 
 
 #### 配置portlet.xml
+Spring Portlet MVC和其Web MVC可以说是如出一辙,只是在Web MVC中处于核心的DispatcherServlet在Portlet MVC中换成了DispatcherPortlet.
+DispatcherPortlet配置在portlet.xml文件中,它继承了Portlet标准中的GenericPortlet,所以它本质上是一个能够将Portlet Request dispatch到Spring框架中其它MVC组件的一个Portlet.
 创建portlet的时候，RAD会帮你创建一个portlet.xml文件，我们只需要对其进行一些配置上的修改就可以了。
 把其中的```<portlet-class>```标签中的值改成```org.springframework.web.portlet.DispatcherPortlet```
 全部代码如下：
@@ -95,6 +97,7 @@ Spring 3 MVC Portlet 所需要的jar包可以去[spring官网](https://github.co
 	<default-namespace>http://springmvcportlet</default-namespace>
 </portlet-app>
 ```
+这里以RenderRequest处理为例,当DispatcherPortlet接收到Request的时候,它会根据handermapping的配置找到相应的Controler来处理请求.Controler处理完后返回一个ModelAndView,对于View的处理则和Web MVC类似了,这里不再做介绍.
 
 
 #### 创建applicationContext.xml
