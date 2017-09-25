@@ -7,7 +7,7 @@ tags: webshpere portal , SpringMVC Portlet
 
 >版权声明：本文为 @WildMeowth
 的原创文章, 可以转载, 但请务必注明作者和出处！！！
-原文链接：[wildmeowth](http://wildmeowth.github.io/2017/09/spring3mvc-Portlet-create-1/)
+原文链接：[wildmeowth](http://wildmeowth.github.io/2017/09/spring3mvc-portlet-create-1/)
 
 ## 摘要
 
@@ -21,17 +21,26 @@ tags: webshpere portal , SpringMVC Portlet
 Spring 3 MVC Portlet 所需要的jar包可以去[spring官网](https://github.com/daleanthony)下载.
 方便大家下载博主就直接贴出地址如下：[http://repo.spring.io/release/org/springframework/spring](http://repo.spring.io/release/org/springframework/spring)
 
+`org.springframework.asm-3.0.4.RELEASE.JAR`<br>
+`org.springframework.beans-3.0.4.RELEASE.JAR`<br>
+`org.springframework.context.support-3.0.4.RELEASE.JAR`<br>
+`org.springframework.context-3.0.4.RELEASE.JAR`<br>
+`org.springframework.core-3.0.4.RELEASE.JAR`<br>
+`org.springframework.expression-3.0.4.RELEASE.JAR`<br>
+`org.springframework.web.portlet-3.0.4.RELEASE.JAR`<br>
+`org.springframework.web.servlet-3.0.4.RELEASE.JAR`<br>
+`org.springframework.web-3.0.4.RELEASE.JAR`
 
 将这些jar包粘贴到portal项目lib目录下即可.
 
 ### 2.配置文件
 
-#### 配置web.xml
+2. 1 配置web.xml
 
 和往常一样, SpringMVCPortlet一样分别设置context-param,listener监听器, servlet以及对应的servlet-mapping.
 
 全部代码如下：
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app id="WebApp_ID" version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	<display-name>SpringMVCPortlet</display-name>
@@ -63,7 +72,7 @@ Spring 3 MVC Portlet 所需要的jar包可以去[spring官网](https://github.co
 ```
 <hr>
 
-#### 配置portlet.xml
+2. 2 配置portlet.xml
 
 Spring Portlet MVC和其Web MVC可以说是如出一辙,只是在Web MVC中处于核心的DispatcherServlet在Portlet MVC中换成了DispatcherPortlet.
 
@@ -73,7 +82,7 @@ DispatcherPortlet配置在portlet.xml文件中,它继承了Portlet标准中的Ge
 把其中的```<portlet-class>```标签中的值改成```org.springframework.web.portlet.DispatcherPortlet```
 
 全部代码如下：
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" id="com.ibm.catebizpacustomerselectorwar.CatebizpacustomerselectorwarPortlet.87bcccfd63">
 	<portlet>
@@ -105,12 +114,12 @@ DispatcherPortlet配置在portlet.xml文件中,它继承了Portlet标准中的Ge
 这里以RenderRequest处理为例,当DispatcherPortlet接收到Request的时候,它会根据handermapping的配置找到相应的Controler来处理请求.Controler处理完后返回一个ModelAndView,对于View的处理则和Web MVC类似了,这里不再做介绍.
 <hr>
 
-#### 创建applicationContext.xml
+2. 3 创建applicationContext.xml
 
 根据web.xml中配置, 在WEB-INF下创建一个context文件夹, 在其下创建一个applicationContext.xml的文件, 并写好配置.
 
 全部代码如下：
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
@@ -156,11 +165,11 @@ DispatcherPortlet配置在portlet.xml文件中,它继承了Portlet标准中的Ge
 ```
 <hr>
 
-#### 创建SpringMVCPortlet-portlet.xml
+2. 4 创建SpringMVCPortlet-portlet.xml
 
 根据portlet.xml文件中```<portlet-name>```标签中的值（例子中是"SpringMVCPortlet"）+"-portlet.xml"为名字创建此文件, 并完成配置.
 全部代码如下：
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	

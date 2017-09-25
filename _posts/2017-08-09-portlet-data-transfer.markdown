@@ -20,7 +20,7 @@ tags: webshpere portal , portlet数据传递
 对于共享呈现参数需要在 portlet.xml 部署文件中的```<portlet-app>```中使用 ```<public-render-parameter>``` 标签. 
 
 For example:
-```
+```xml
 <portlet-app ...>
     <portlet>
         <portlet-name>Portlet A</portlet-name>
@@ -41,7 +41,7 @@ For example:
 然后在每个 ```<portlet>``` 中使用 ```<supported-public-render-parameter>``` 标签. 
 
 For example:
-```
+```xml
 <portlet>
     <portlet-name>Portlet A</portle-name>
     ......
@@ -62,7 +62,7 @@ For example:
 For example:
 
 Portlet A 设定共享呈现参数
-```
+```java
 public void processAction(ActionRequest actionRequest,
         ActionResponse actionResponse) throws PortletException, IOException {
     ...
@@ -72,7 +72,7 @@ public void processAction(ActionRequest actionRequest,
 ```
 
 Portlet B 获取共享呈现参数
-```
+```java
 public void render(RenderRequest renderRequest,
         renderResponse renderResponse) throws PortletException, IOException {
     ...
@@ -90,13 +90,13 @@ PortletSession在应用级即PortletSession.APPLICATION_SCOPE, 可以在多个po
 For example:
 
 Portlet A 中：
-```
+```java
 String data = "Don't worry, be happy!";
 PortletSession session = request.getPortletSession().setAttribute("data", data, PortletSession.APPLICATION_SCOPE);
 ```
 
 Portlet B 中：
-```
+```java
 String data= (String) request.getPortletSession().getAttribute("data",PortletSession.APPLICATION_SCOPE);
 ```
 
