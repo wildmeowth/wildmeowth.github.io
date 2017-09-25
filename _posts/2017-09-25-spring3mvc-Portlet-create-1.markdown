@@ -158,7 +158,7 @@ DispatcherPortlet配置在portlet.xml文件中,它继承了Portlet标准中的Ge
 
 #### 创建SpringMVCPortlet-portlet.xml
 
-根据portlet.xml文件中```<portlet-name>```标签中的值（例子中是"SpringMVCPortlet"）+"-portlet.xml"为名字创建此文件，并完成配置。
+根据portlet.xml文件中```<portlet-name>```标签中的值（例子中是“SpringMVCPortlet”）+“-portlet.xml”为名字创建此文件，并完成配置。
 全部代码如下：
 ```
 <?xml version="1.0" encoding="UTF-8"?>
