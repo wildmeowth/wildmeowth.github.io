@@ -18,7 +18,7 @@ tags: webshpere portal , SpringMVC Portlet
 ### 1.下载jar包
 
 首先我们需要下载Spring 3 MVC所需要的jar包.
-Spring 3 MVC Portlet 所需要的jar包可以去[spring官网](https://github.com/daleanthony)下载.
+Spring 3 MVC Portlet 所需要的jar包可以去[spring官网](https://spring.io/)下载.<br>
 方便大家下载博主就直接贴出地址如下：[http://repo.spring.io/release/org/springframework/spring](http://repo.spring.io/release/org/springframework/spring)
 
 `org.springframework.asm-3.0.4.RELEASE.JAR`<br>
