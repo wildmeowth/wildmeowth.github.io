@@ -7,7 +7,7 @@ tags: webshpere portal , portlet数据传递
 
 >版权声明：本文为 @WildMeowth
 的原创文章，可以转载，但请务必注明作者和出处！！！
-原文链接：[wildmeowth.github.io](http://wildmeowth.github.io/2017/08/portlet-data-transfer/)
+原文链接：[wildmeowth](http://wildmeowth.github.io/2017/08/portlet-data-transfer/)
 
 ## 摘要
 

@@ -7,7 +7,7 @@ tags: webshpere portal , SpringMVC Portlet
 
 >版权声明：本文为 @WildMeowth
 的原创文章，可以转载，但请务必注明作者和出处！！！
-原文链接：[wildmeowth.github.io](http://wildmeowth.github.io/2017/09/spring3mvc-Portlet-create-1/)
+原文链接：[wildmeowth](http://wildmeowth.github.io/2017/09/spring3mvc-Portlet-create-1/)
 
 ## 摘要
 
@@ -16,6 +16,7 @@ tags: webshpere portal , SpringMVC Portlet
 ## 正文
 
 ### 1.下载jar包
+
 首先我们需要下载Spring 3 MVC所需要的jar包。
 Spring 3 MVC Portlet 所需要的jar包可以去[spring官网](https://github.com/daleanthony)下载。
 方便大家下载博主就直接贴出地址如下：[http://repo.spring.io/release/org/springframework/spring](http://repo.spring.io/release/org/springframework/spring)
@@ -60,6 +61,7 @@ Spring 3 MVC Portlet 所需要的jar包可以去[spring官网](https://github.co
 </web-app>
 ```
 
+
 #### 配置portlet.xml
 创建portlet的时候，RAD会帮你创建一个portlet.xml文件，我们只需要对其进行一些配置上的修改就可以了。
 把其中的```<portlet-class>```标签中的值改成```org.springframework.web.portlet.DispatcherPortlet```
@@ -93,6 +95,7 @@ Spring 3 MVC Portlet 所需要的jar包可以去[spring官网](https://github.co
 	<default-namespace>http://springmvcportlet</default-namespace>
 </portlet-app>
 ```
+
 
 #### 创建applicationContext.xml
 根据web.xml中配置，在WEB-INF下创建一个context文件夹，在其下创建一个applicationContext.xml的文件，并写好配置。
@@ -142,6 +145,7 @@ Spring 3 MVC Portlet 所需要的jar包可以去[spring官网](https://github.co
 </bean>
 ```
 
+
 #### 创建SpringMVCPortlet-portlet.xml
 根据portlet.xml文件中```<portlet-name>```标签中的值（例子中是"SpringMVCPortlet"）+"-portlet.xml"为名字创建此文件，并完成配置。
 全部代码如下：
@@ -162,6 +166,7 @@ Spring 3 MVC Portlet 所需要的jar包可以去[spring官网](https://github.co
 	
 </beans>
 ```
+
 
 至此，基本配置完成。
 
