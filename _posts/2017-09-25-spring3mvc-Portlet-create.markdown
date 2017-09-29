@@ -194,7 +194,8 @@ DispatcherPortlet配置在portlet.xml文件中,它继承了Portlet标准中的Ge
 </beans>
 ```
 
-至此, 基本配置完成目录结构如下图.
+至此, 基本配置完成目录结构如下图: 
+![structure](http://wildmeowth.github.io/assets/images/Bimages/structure.png)
 
 ### 3.代码部分
 在com.wildMeowth.portal.springmvcportlet.controller包下创建一个类SpringMVCPortletController, 在类中写下如下代码: 
@@ -223,4 +224,5 @@ public class CusNameDisplayPortletViewController  {
 <h1>Hello World</h1>
 ```
 
-启动服务器，最终效果如下图
+启动服务器，最终效果如下图:
+![effects](http://wildmeowth.github.io/assets/images/Bimages/effects.png)
