@@ -1,19 +1,24 @@
 ---
 layout: post
-title: 使用Spring 3 MVC创建一个基本的websphsere portlet 上- 野猫
+title: Spring Protlet MVC - 使用Spring 3 MVC创建一个基本的websphsere portlet - 野猫
 date: 2017-09-25 13:58:12.000000000 +08:00
 tags: webshpere portal , SpringMVC Portlet
 ---
 
 >版权声明：本文为 @WildMeowth
 的原创文章, 可以转载, 但请务必注明作者和出处！！！
-原文链接：[wildmeowth](http://wildmeowth.github.io/2017/09/spring3mvc-portlet-create-1/)
+原文链接：[wildmeowth](http://wildmeowth.github.io/2017/09/spring3mvc-portlet-create/)
 
 ## 摘要
 
 本文主要介绍IBM Websphere Portal下使用Spring 3 MVC创建一个基本的websphsere portlet.
 
 ## 正文
+
+### 0.创建一个Portal Project
+打开Rational Application Developer, 右键new一个新的Portal Project. 
+
+最终目录结构点此跳转.
 
 ### 1.下载jar包
 
@@ -35,9 +40,9 @@ Spring 3 MVC Portlet 所需要的jar包可以去[spring官网](https://spring.io
 
 ### 2.配置文件
 
-2. 1 配置web.xml
+#### 2. 1 配置web.xml
 
-和往常一样, SpringMVCPortlet一样分别设置context-param,listener监听器, servlet以及对应的servlet-mapping.
+和往常一样, SpringMVCPortlet一样分别设置contextConfigLocation,ContextLoaderListener监听器, ViewRendererServlet视图渲染解析器. 
 
 全部代码如下：
 ```xml
@@ -72,7 +77,7 @@ Spring 3 MVC Portlet 所需要的jar包可以去[spring官网](https://spring.io
 ```
 <hr>
 
-2. 2 配置portlet.xml
+#### 2. 2 配置portlet.xml
 
 Spring Portlet MVC和其Web MVC可以说是如出一辙,只是在Web MVC中处于核心的DispatcherServlet在Portlet MVC中换成了DispatcherPortlet.
 
@@ -101,7 +106,7 @@ DispatcherPortlet配置在portlet.xml文件中,它继承了Portlet标准中的Ge
 			<portlet-mode>view</portlet-mode>
 		</supports>
 		<supported-locale>en</supported-locale>
-		<resource-bundle>springmvcportlet.nl.CusNameDisplayPortletResource</resource-bundle>
+		<resource-bundle>springmvcportlet.nl.HelloWorldPortletResource</resource-bundle>
 		<portlet-info>
 			<title>SpringMVCPortlet</title>
 			<short-title>SpringMVCPortlet</short-title>
@@ -114,9 +119,11 @@ DispatcherPortlet配置在portlet.xml文件中,它继承了Portlet标准中的Ge
 这里以RenderRequest处理为例,当DispatcherPortlet接收到Request的时候,它会根据handermapping的配置找到相应的Controler来处理请求.Controler处理完后返回一个ModelAndView,对于View的处理则和Web MVC类似了,这里不再做介绍.
 <hr>
 
-2. 3 创建applicationContext.xml
+#### 2. 3 创建applicationContext.xml
 
 根据web.xml中配置, 在WEB-INF下创建一个context文件夹, 在其下创建一个applicationContext.xml的文件, 并写好配置.
+
+我们可以在applicationContext.xml中设置HandlerMapping,ViewResolver,Controller等，本例中Controller,HandlerMapping在后面的文件中设置。
 
 全部代码如下：
 ```xml
@@ -132,7 +139,7 @@ DispatcherPortlet配置在portlet.xml文件中,它继承了Portlet标准中的Ge
 		<property name="basenames">
 			<list>
 				<!-- Add appropriate resource properties path -->
-				<value>springmvcportlet.nl.CusNameDisplayPortletResource</value>
+				<value>springmvcportlet.nl.HelloWorldPortletResource</value>
 			</list>
 		</property>
 	</bean>
@@ -165,9 +172,9 @@ DispatcherPortlet配置在portlet.xml文件中,它继承了Portlet标准中的Ge
 ```
 <hr>
 
-2. 4 创建SpringMVCPortlet-portlet.xml
+#### 2. 4 创建SpringMVCPortlet-portlet.xml
 
-根据portlet.xml文件中```<portlet-name>```标签中的值（例子中是"SpringMVCPortlet"）+"-portlet.xml"为名字创建此文件, 并完成配置.
+根据portlet.xml文件中```<portlet-name>```标签中的值（例子中是"SpringMVCPortlet"）+"-portlet.xml"为名字创建此文件, 并配置Controller,HandlerMappings.
 全部代码如下：
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -187,7 +194,33 @@ DispatcherPortlet配置在portlet.xml文件中,它继承了Portlet标准中的Ge
 </beans>
 ```
 
+至此, 基本配置完成目录结构如下图.
 
-至此, 基本配置完成.
+### 3.代码部分
+在com.wildMeowth.portal.springmvcportlet.controller包下创建一个类SpringMVCPortletController, 在类中写下如下代码: 
 
-下一篇介绍代码部分.
+```java
+@Controller
+@RequestMapping("VIEW")
+public class CusNameDisplayPortletViewController  {
+
+	@RequestMapping
+	public String handleRenderRequestInternal(RenderRequest request, RenderResponse response) throws Exception {
+
+		return "index";
+		
+	}
+}
+```
+
+在jsp目录下创建对应的"index.jsp"jsp文件, 如下代码：
+
+```xml
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
+<h1>Hello World</h1>
+```
+
+启动服务器，最终效果如下图
