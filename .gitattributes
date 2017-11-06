@@ -1,0 +1,3 @@
+*.js linguist-language=jekyll
+*.css linguist-language=jekyll
+*.html linguist-language=jekyll
