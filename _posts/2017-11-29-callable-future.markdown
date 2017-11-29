@@ -22,14 +22,14 @@ public static void main(String[] args) throws Exception {
 
         @Override
         public String call() throws Exception {
-            Thread.sleep(4000);
+            Thread.sleep(4000);// 可能做一些事情
             return "Test Callable ";
         }
 
     };
-    System.out.println(callable.call()+callable.call());
+    System.out.println(callable.call()+callable.call());// 输出Test Callable Test Callable
     long after = System.currentTimeMillis();
-    System.out.println(after-before);
+    System.out.println(after-before);// 输出8009
 }
 ```
 
@@ -45,17 +45,17 @@ public static void main(String[] args) throws Exception {
 
         @Override
         public String call() throws Exception {
-            Thread.sleep(4000);
+            Thread.sleep(4000);// 可能做一些事情
             return "Test Callable";
         }
     };
     ExecutorService threadPool = Executors.newSingleThreadExecutor();
     Future<String> future = threadPool.submit(callable);
     
-    System.out.println(future.get()+future.get());
+    System.out.println(future.get()+future.get());// 输出Test Callable Test Callable
     //System.out.println(callable.call()+callable.call());
     long after = System.currentTimeMillis();
-    System.out.println(after-before);
+    System.out.println(after-before);// 输出4006
 }
 ```
 此时, 第一个System.out.println依旧得到`Test Callable Test Callable`
@@ -71,7 +71,7 @@ public static void main(String[] args) throws Exception {
 
         @Override
         public String call() throws Exception {
-            Thread.sleep(4000);
+            Thread.sleep(4000);// 可能做一些事情
             return "Test Callable";
         }
     };
@@ -87,7 +87,7 @@ public static void main(String[] args) throws Exception {
     }
     
     long after = System.currentTimeMillis();
-    System.out.println(after-before);
+    System.out.println(after-before);// 输出4006
 }
 ```
 FutureTask 实现了Future和Runnable两个接口, 意味着可以同时处理Runnable和Future, 它的好处在于如果有一个返回值计算需要很久, 这个返回值不需要立刻得到, 但线程中其他代码需要被尽快执行的时候, 使用FutureTask, 可以先做其他事, 等到结果计算完了再返回结果。
