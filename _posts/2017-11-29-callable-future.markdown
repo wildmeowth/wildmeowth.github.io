@@ -7,7 +7,7 @@ tags: Callable Future , 线程 , 并发 , 异步
 
 >版权声明：本文为 @WildMeowth
 的原创文章, 可以转载, 但请务必注明作者和出处！！！
-原文链接：[wildmeowth](http://wildmeowth.github.io/2017/08/callable-future/)
+原文链接：[wildmeowth](http://wildmeowth.github.io/2017/11/callable-future/)
 
 
 
