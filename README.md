@@ -1,5 +1,5 @@
 # Blog - Jekyll
-This is **<font size=5>[my blog](https://wildmeowth.github.io/)</font>** which is based on the theme [Jekyll](http://jekyllrb.com). 
+This is **<font size=5>[my blog](https://wildmeowth.github.io/)</font>**[www.wildmeowth.com](http://www.wildmeowth.com/) which is based on the theme [Jekyll](http://jekyllrb.com). 
 
 ## Licence
 
