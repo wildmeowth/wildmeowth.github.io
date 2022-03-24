@@ -30,7 +30,6 @@ nav:
 subscribe_button:
     title: 订阅
     description: subscribe
-    func: openQRcode()
 
 # Pagination
 gems: [jekyll-paginate]

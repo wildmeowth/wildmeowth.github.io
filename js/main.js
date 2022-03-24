@@ -1,8 +1,8 @@
 $(document).ready(function() {
 
-  function openQRcode(){
-    console.log("微信搜索 吃鸡翅的程序猫")
-  }
+  $('a.subscribe-button').click(function(){
+    console.log("微信搜索 吃鸡翅的程序猫");
+  });
   $('a.blog-button').click(function() {
     // If already in blog, return early without animate overlay panel again.
     if (location.hash && location.hash == "#blog") return;

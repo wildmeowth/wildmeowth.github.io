@@ -25,7 +25,7 @@
                 {% for item in site.nav %}
                   <li class="navigation__item"><a href="{{item.url}}" target="_blank" title="{{item.description}}">{{item.title}}</a></li>
                 {% endfor %}
-                 <li class="navigation__item"><a onclick="{{site.subscribe_button.func}}" title="{{site.subscribe_button.description}}">{{site.subscribe_button.title}}</a></li>
+                 <li class="navigation__item"><a class="subscribe-button" title="{{site.subscribe_button.description}}">{{site.subscribe_button.title}}</a></li>
               </ul>
             </nav>
           </div>
