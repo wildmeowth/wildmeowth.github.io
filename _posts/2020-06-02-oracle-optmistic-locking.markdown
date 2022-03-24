@@ -2,7 +2,7 @@
 layout: post
 title: 记一次负载测试中出现select for update悲观锁产生的问题 - 野猫
 date: 2020-06-02 12:43:11.000000000 +08:00
-tags: JVM , GC , 垃圾回收器
+tags: Oracle , 死锁 , 事务， 同步异步
 ---
 
 >版权声明：本文为 @WildMeowth
