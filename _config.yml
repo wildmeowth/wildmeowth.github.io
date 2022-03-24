@@ -24,7 +24,13 @@ blog_button:
 nav:
     - {title: 简历, description: My Prfiles, url: '/nav1/'}
     - {title: 关于, description: About me, url: '/'}
-    - {title: 订阅, description: subscribe, url: '/'}
+    #- {title: 订阅, description: subscribe, url: '/'}
+
+# subscribe button
+subscribe_button:
+    title: 订阅
+    description: subscribe
+    func: openQRcode()
 
 # Pagination
 gems: [jekyll-paginate]
