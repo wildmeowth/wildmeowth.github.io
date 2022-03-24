@@ -78,7 +78,7 @@ wildmeowth@wildmeowth-VirtualBox:~$ printf "%x\n" 4834
 
 3. jstack 命令 - jdk 自带jstack 查看Java进程和线程的具体信息
 
-jstack 4832 | grep -25 12e2
+`jstack 4832 | grep -25 12e2`
 
 ```
 wildmeowth@wildmeowth-VirtualBox:~$ jstack 4832 | grep -25 12e2
@@ -122,4 +122,4 @@ wildmeowth@wildmeowth-VirtualBox:~$ jps
 4859 Jps
 ```
 
-最后顺便 kill 4832 把它杀了
+最后顺便 `kill 4832` 把它杀了
