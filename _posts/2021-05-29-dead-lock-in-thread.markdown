@@ -36,7 +36,7 @@ public class Chopsticks {
 	}
 }
 ```
-```
+```java
 package com.wildemeowth.thread;
 public class Philosopher extends Thread {
 	private int name;
@@ -76,7 +76,7 @@ public class Philosopher extends Thread {
 }
 
 ```
-```
+```java
 package com.wildemeowth.thread;
 public class App {
 
@@ -151,47 +151,48 @@ Found 1 deadlock.
 想象一下，顺时针顺序下，第一个哲学家是右撇子拿了右手边筷子，他下一步准备拿左手，第二个哲学家左撇子拿了左手筷子，下一步拿他右边筷子，那么第一第二这两位哲学家必然在下一步有一个能拿到第二根筷子于是他吃完了饭，放下了所有筷子。死锁解决。
 
 改进 Philosopher类 eat 方法
-```
+```java
 private void eat() {
-		if(this.name%2==0) {
-			synchronized(leftcs){
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				System.out.println(this.name +"get the left chopsticks"+leftcs.getName());
-				synchronized(rightcs) {
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					System.out.println(this.name + "get the second chopsticks start to eat"+ rightcs.getName());
-				}
+	if(this.name%2==0) {
+		synchronized(leftcs){
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		}else {
-			synchronized(rightcs){
+			System.out.println(this.name +"get the left chopsticks"+leftcs.getName());
+			synchronized(rightcs) {
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				System.out.println(this.name +"get the right chopsticks"+rightcs.getName());
-				synchronized(leftcs) {
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					System.out.println(this.name + "get the second chopsticks start to eat"+ leftcs.getName());
-				}
+				System.out.println(this.name + "get the second chopsticks start to eat"+ rightcs.getName());
 			}
 		}
+	}else {
+		synchronized(rightcs){
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println(this.name +"get the right chopsticks"+rightcs.getName());
+			synchronized(leftcs) {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println(this.name + "get the second chopsticks start to eat"+ leftcs.getName());
+			}
+		}
+	}
+}
 
 ```
 奇数右撇子，偶数左撇子。
