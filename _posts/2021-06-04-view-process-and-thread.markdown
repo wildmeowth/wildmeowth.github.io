@@ -69,7 +69,7 @@ wildmeo+  0.0  19    - futex_    -      -  4849 00:00:00
 
 ```
 
-数遍转下16进制翻遍查询
+顺便转下16进制方便查询
 
 ```
 wildmeowth@wildmeowth-VirtualBox:~$ printf "%x\n" 4834
