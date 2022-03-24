@@ -24,7 +24,9 @@ public class App {
 
 }
 ```
+
 1. top 命令 - 直接一个top命令，看到 PID为4832的这个进程把CPU跑满了
+
 ```
 top - 09:16:54 up 22 min,  2 users,  load average: 1.05, 1.15, 0.86
 Tasks: 193 total,   2 running, 191 sleeping,   0 stopped,   0 zombie
@@ -40,12 +42,13 @@ KiB Swap:  4191228 total,        0 used,  4191228 free.  1069516 cached Mem
  1840 wildmeo+  20   0  123408   3188   2800 S   0.4  0.0   0:02.20 VBoxClient                                                                                                                               
  4575 wildmeo+  20   0 5799608 675708  70524 S   0.4  8.3   2:02.68 java                                                                                                                                     
  4851 wildmeo+  20   0   29152   3384   2864 R   0.4  0.0   0:00.18 top                                                                                                                                      
-...后边进程省略...
+后边进程省略
 ```
 
 2. ps 命令 - 跑一把ps命令可以看到其具体出问题的线程
 
 命令`ps -mp 4832 -o THREAD,tid,time `， 查询得到线程TID 4834
+
 ```
 wildmeowth@wildmeowth-VirtualBox:~$ ps -mp 4832 -o THREAD,tid,time
 USER     %CPU PRI SCNT WCHAN  USER SYSTEM   TID     TIME
@@ -65,14 +68,18 @@ wildmeo+  0.0  19    - futex_    -      -  4848 00:00:00
 wildmeo+  0.0  19    - futex_    -      -  4849 00:00:00
 
 ```
+
 数遍转下16进制翻遍查询
+
 ```
 wildmeowth@wildmeowth-VirtualBox:~$ printf "%x\n" 4834
 12e2
 ```
+
 3. jstack 命令 - jdk 自带jstack 查看Java进程和线程的具体信息
 
 jstack 4832 | grep -25 12e2
+
 ```
 wildmeowth@wildmeowth-VirtualBox:~$ jstack 4832 | grep -25 12e2
 2022-03-24 09:23:28
@@ -107,7 +114,8 @@ JNI global references: 11
 
 4. jps 命令 - 我们也可以用Java 自带的jps 稍加观察
 
-可以简单看出是 App类进程搞得坏事
+可以简单看出是 App类进程搞的坏事
+
 ```
 wildmeowth@wildmeowth-VirtualBox:~$ jps
 4832 App
