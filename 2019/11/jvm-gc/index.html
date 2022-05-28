@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>JVM GC 垃圾收集器 （一） - 野猫嗷嗷嗷</title>
+  <meta name="description" content="在了解JVM 的过程中，就不得不提到各代的垃圾收集器。Stop the world。Serial &amp;&amp; Serial OldSerial 和 Serial Old 分别作用于新生代和老年代。属于单线程，在GC时Stop the world，暂停其他线程直至收集结束。">
+  <meta name="author" content="Colin Miao">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="JVM GC 垃圾收集器 （一）">
+  <meta name="twitter:description" content="在了解JVM 的过程中，就不得不提到各代的垃圾收集器。Stop the world。Serial &amp;&amp; Serial OldSerial 和 Serial Old 分别作用于新生代和老年代。属于单线程，在GC时Stop the world，暂停其他线程直至收集结束。">
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="JVM GC 垃圾收集器 （一）">
+  <meta property="og:description" content="在了解JVM 的过程中，就不得不提到各代的垃圾收集器。Stop the world。Serial &amp;&amp; Serial OldSerial 和 Serial Old 分别作用于新生代和老年代。属于单线程，在GC时Stop the world，暂停其他线程直至收集结束。">
+  
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico" />
+  <link href="/assets/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+  
+  <!-- Bootstrap Core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="canonical" href="http://WildMeowth.github.io/2019/11/jvm-gc/">
+  <link rel="alternate" type="application/rss+xml" title="Wild Meowth" href="http://WildMeowth.github.io/feed.xml">
+  
+  <!--站长统计-->
+  <!--<meta name="google-site-verification" content="" />-->
+  <meta name="baidu-site-verification" content="" />
+
+  
+  
+  <!--阅读统计-->
+  <!--  <script async="" src="https://www.google-analytics.com/analytics.js"></script>-->
+  <!--不蒜子的访问统计-->
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <!-- require APlayer -->
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script> -->
+  <!-- require MetingJS -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+  <meting-js
+    server="netease"
+    type="song"
+    id="386844"
+    fixed="true"
+    autoplay="false"
+    lrc-type="1">
+  </meting-js> -->
+</head>
+
+
+  <body>
+    <div class="grey-div d-none"></div>
+    <div class="subscribe-content d-none">
+        <img src="/assets/images/wechatQR.jpg"/>
+    </div>
+    
+    <span class="mobile btn-mobile-menu">
+      <i class="fa fa-list btn-mobile-menu__icon"></i>
+      <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+  </span>
+  
+    
+      
+      <nav class="header-navigation navbar-custom nav_post ">
+  <ul class="header-ul">
+    
+      <li class="header-item"><a href="/home/" target="_blank" title="My Prfiles">首页</a></li>
+    
+      <li class="header-item"><a href="/aboutme" target="" title="About me">关于</a></li>
+    
+    <li class="header-item"><a href="/" title="Blog" class="blog-button">博客</a></li>
+    
+    <li class="header-item btn-search-icon"><a class href="javascript:void(0)"><i class="fa fa-search"></i></a></li>
+  </ul>
+  <div class="desk__d-none"><nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+  
+
+  
+  <!-- Github -->
+  <li class="navigation__item">
+    <a href="https://github.com/WildMeowth" title="@WildMeowth 的 Github" target="_blank">
+      <i class='social fa fa-github'></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+  
+  
+  
+
+  
+
+  <!-- RSS -->
+  <li class="navigation__item">
+    <a href="/feed.xml" rel="author" title="RSS" target="_blank">
+      <i class='social fa fa-rss'></i>
+      <span class="label">RSS</span>
+    </a>
+  </li>
+
+  
+  <!-- Email -->
+  <li class="navigation__item">
+    <a href="mailto:sddzok@163.com" title="Contact me">
+      <i class='social fa fa-envelope'></i>
+      <span class="label">Email</span>
+    </a>
+  </li>
+  
+
+  </ul>
+</nav>
+</div>
+</nav>
+        <header class="row margin-zero post__header-header  " style="background-image: url('/'); ">
+          
+          <div class="content-wrapper post-content__wrapper">
+            <div class="content-wrapper__inner">
+              <div class="post-header
+              col-lg-8 col-lg-offset-2
+              col-md-10 col-md-offset-1
+              post-container">
+                <div class="post-meta">
+                <!--<time datetime="2019-11-02 18:52:24 +0800" itemprop="datePublished" class="post-meta__date date">2019-11-02</time> &#8226; <span class="post-meta__tags tags">JVM</span>-->
+                  <a title="类别：JAVA" href="/categories/#JAVA" class="post-meta__tags tags categories">JAVA</a><a title="标签：JVM" href="/tags/#JVM" class="post-meta__tags tags">JVM</a> &#8226; View <span id="busuanzi_value_page_pv"></span> times.
+                </div>
+                <h1 class="post-title">JVM GC 垃圾收集器 （一）</h1> 
+                <div class="post-from">posted by 野猫 on <a href="/dates/#2019"><time datetime="2019-11-02 18:52:24 +0800" itemprop="datePublished" class="post-meta__date date">November 2, 2019</time></a></div>
+              </div>
+            </div>
+          </div>
+        </header>
+    
+    
+    <div class="content-wrapper post-content__wrapper">
+        <div class="content-wrapper__inner">
+            <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+            <div class="row"> 
+  <article class="post-container post-container--single 
+                  col-lg-8 col-lg-offset-2
+                  col-md-10 col-md-offset-1
+                  post-container" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <section class="post">
+        
+        <blockquote>
+        <p>
+        版权声明：本文为 @WildMeowth 的原创文章，可以转载，但请务必注明作者和出处！！！原文链接：<a href="http://WildMeowth.github.io/2019/11/jvm-gc/">wildmeowth</a>
+        </p>
+        </blockquote>
+        
+      <p>在了解JVM 的过程中，就不得不提到各代的垃圾收集器。Stop the world。</p>
+<h2 id="serial--serial-old">Serial &amp;&amp; Serial Old</h2>
+<p>Serial 和 Serial Old 分别作用于新生代和老年代。属于单线程，在GC时Stop the world，暂停其他线程直至收集结束。</p>
+
+<p>Serial作用于新生代，由于新生代的对象产生及消逝比较频繁存活少，使用标记Copy 复制算法。</p>
+
+<p>Serial Old 是作用于老年代存活率高， 老年代的对象使用标记整理算法。</p>
+
+<p>只能作用小内存(几十-几百M)，不然stop the world时间太长。</p>
+
+<h2 id="parallel-scavenge--parallel-old">Parallel Scavenge &amp;&amp; Parallel Old</h2>
+<p>Parallel Scavenge 多线程并行，作用新生代，复制</p>
+
+<p>Parallel Old 多线程并行，作用于老年代，标记整理</p>
+
+<p>jdk1.8 默认</p>
+
+<p>适用于几百M-两三个G</p>
+
+<h2 id="parnew--cms">ParNew &amp;&amp; CMS</h2>
+<p>ParNew 作用于新生代</p>
+
+<p>CMS 多线程并发（并发边创建边回收），作用于老年代 标记清除算法 （三色标记）</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>- 初始标记 慢
+- 并发标记 快
+- 重新标记 慢
+- 并发清除 快
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<pre><code class="language-mermaid">graph TB
+    Root A(黑)--&gt;B（灰）--&gt;C（白）
+</code></pre>
+
+<p>初始标记问题：</p>
+<ol>
+  <li>回收过程中，业务线程突然B到C引用消失，导致本次B回收没被清理（浮动垃圾）</li>
+  <li>回收过程中，业务线程突然从A指向C, B到C的引用突然消失，这时候会把有用的C给清了。大问题</li>
+</ol>
+
+<p>解决方案： 通过写屏障增量更新</p>
+
+<p>但同时增量更新（incremental update）也会有隐蔽问题</p>
+
+<p>A中两个变量的第一个变量标完标下一个的时候stop the world回来后第一个变量指向C了，标完二变量后A变黑，D有被忽略当成垃圾了</p>
+
+<p>CMS这一bug在新的G1中解决</p>
+
+<p>CMS的 remark阶段，必须重头扫描一遍 想解决是stw由于算法bug可能耗时也长</p>
+
+<p>关于标记清除，复制，标记整理请看<a href="http://wildmewth.github.io/2018/03/gc-algorithm">这里</a></p>
+
+    </section>
+  </article>
+
+  <!-- Side Catalog Container -->
+  
+  <div class="
+      col-lg-2 col-lg-offset-0
+      visible-lg-block
+      sidebar-container
+      catalog-container">
+      <div class="side-catalog">
+          <hr class="hidden-sm hidden-xs">
+          <h5 class="exclude">
+              <a class="catalog-toggle" href="#">CATALOG</a>
+          </h5>
+          <ul class="catalog-body"></ul>
+      </div>
+  </div>
+  
+</div>
+<div class="row">
+  <div class="post-header
+                  col-lg-8 col-lg-offset-2
+                  col-md-10 col-md-offset-1">
+    <section class="read-more">
+   
+   
+   <div class="read-more-item">
+       <span class="read-more-item-dim">最近的文章</span>
+       <a class="post-content" href="/2020/06/oracle-block/" title="link to 记一次负载测试中出现select for update悲观锁产生的问题">
+            <h2 class="post-list__post-title post-title">记一次负载测试中出现select for update悲观锁产生的问题</h2>
+            <p class="excerpt">在一次release 开发过程中, QA team 在做load test 的时候 发现许多库存预存的请求报错。db发现有 row lock 的提醒， 技术支持查看Oracle报告时发现另一个release order to dbs(订单release到dbs的系统)的接口中用到了select for update 语句以下是当时的业务逻辑  The agent CatChinaReleaseOrderAgent start aA series of tasks are executed ...&hellip;</p>
+       </a>
+       <div class="post-list__meta"><a href="/dates/#2020"><time datetime="2020-06-02 12:43:11 +0800" class="post-list__meta--date date">2020-06-02</time></a> &#8226; <a title="类别：Database" href="/categories/#Database" class="post-list__meta--tags tags categories">Database</a><a title="标签：Oracle" href="/tags/#Oracle" class="post-list__meta--tags tags">Oracle</a>&nbsp;&nbsp;<a class="btn-border-small" href=/2020/06/oracle-block/>继续阅读</a></div>
+   </div>
+   
+   
+   
+   
+   <div class="read-more-item">
+       <span class="read-more-item-dim">更早的文章</span>
+       <a class="post-content" href="/2017/11/callable-future/" title="link to Callable + Future 线程异步">
+            <h2 class="post-list__post-title post-title">Callable + Future 线程异步</h2>
+            <p class="excerpt">Callable 接口和Runnable 接口相似, 但两者也有很关键的区别. Callable 可以返回结果, Runnable 不会返回结果. 因此相对来说Callable功能更加强大.和Runnable的run() 方法类似, Callable有一个Call() 方法, 我们可以先创建一个新的Callable, 然后使用Callable的 call() 方法, 得到返回的结果.123456789101112131415public static void main(String[] ...&hellip;</p>
+       </a>
+       <div class="post-list__meta"><a href="/dates/#2017"><time datetime="2017-11-29 16:12:31 +0800" class="post-list__meta--date date">2017-11-29</time></a> &#8226; <a title="类别：JAVA" href="/categories/#JAVA" class="post-list__meta--tags tags categories">JAVA</a><a title="标签：多线程" href="/tags/#多线程" class="post-list__meta--tags tags">多线程</a>&nbsp;&nbsp;<a class="btn-border-small" href=/2017/11/callable-future/>继续阅读</a></div>
+   </div>
+   
+</section>
+
+    <!-- 多说评论框 start -->
+	<div id="comments" class="ds-thread" data-thread-key="/2019/11/jvm-gc" data-title="JVM GC 垃圾收集器 （一）" data-url="http://WildMeowth.github.io/2019/11/jvm-gc/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"icurious"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+
+
+<!-- 评论功能 -->
+<!--<section class="post-comments">
+  
+    <div id="disqus_thread"></div>
+    <script>
+    
+    var disqus_config = function () {
+        this.page.url = "http://WildMeowth.github.io/2019/11/jvm-gc/";
+        this.page.identifier = "/2019/11/jvm-gc/";
+    };
+
+    var disqus_shortname = 'WildMeowth';
+    
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>要查看<a href="http://disqus.com/?ref_noscript"> Disqus </a>评论，请启用 JavaScript</noscript>
+    
+  
+  
+  
+  
+</section>-->
+
+    <hr class="post-list__divider full-width" />
+  </div>
+</div>
+
+            
+
+<section class="row footer no-border">
+    <footer>
+        <span class="footer__copyright footer-contact_us">
+            联系我：    
+            
+
+            
+            <!-- Github -->
+                <a href="https://github.com/WildMeowth" title="@WildMeowth 的 Github" target="_blank">
+                    <i class='social fa fa-github'></i>
+                </a>
+            
+
+            
+
+            
+
+            
+            <!-- Email -->
+                <a href="mailto:sddzok@163.com" title="Contact me">
+                    <i class='social fa fa-envelope'></i>
+                </a>
+            
+        </span>
+    	<!-- <span class="footer__copyright">本站点采用<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享 署名-非商业性使用-相同方式共享 4.0 国际 许可协议</a></span> -->
+        <span class="footer__copyright">
+            Site powered by <a href="https://jekyllrb.com">Jekyll</a> & <a href="https://pages.github.com">Github Pages</a> 
+            <!-- 于 2022-05-28 生成  -->
+            .<a class="br"><br/></a> Theme designed by <a href="https://github.com/wildmeowth"><a href="http://WildMeowth.github.io">@WildMeowth</a></a> 
+             - &copy; 2022
+        </span>
+        <!--访问次数统计-->
+        <span class="footer__copyright">
+            <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+            <span id="busuanzi_container_site_uv">，访客数<span id="busuanzi_value_site_uv"></span>人次</span>
+        </span>
+        
+    </footer>
+</section>
+
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+
+<script type="text/javascript" src="/js/main.js"></script>
+
+<script type="text/javascript" src="/js/asidenav.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon,.btn-search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'article.post-container.active'
+        } else {
+            _containerSelector = 'article.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1:not(".post-title"),h2,h3,h4,h5:not(".exclude"),h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<script>
+    var OriginTitle = document.title;
+    var titleTime;
+    document.addEventListener('visibilitychange', function () {
+        if (document.hidden) {
+            $('[rel="icon"]').attr('href', "/assets/images/cry.ico");
+            $('[rel="shortcut icon"]').attr('href', "/assets/images/cry.ico");
+            document.title = '⊙﹏⊙ 宝，不要离开我好吗！';
+            clearTimeout(titleTime);
+        }
+        else {
+            $('[rel="icon"]').attr('href', "/assets/images/favicon.ico");
+            $('[rel="shortcut icon"]').attr('href', "/assets/images/favicon.ico");
+            document.title = '\\^o^/ 呀呼！我就知道你会回来的' + OriginTitle;
+            titleTime = setTimeout(function () {
+                document.title = OriginTitle;
+            }, 2000);
+        }
+    });
+</script>
+
+
+
+    
+  </body>
+
+</html>

@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>记一次负载测试中出现select for update悲观锁产生的问题 - 野猫嗷嗷嗷</title>
+  <meta name="description" content="在一次release 开发过程中, QA team 在做load test 的时候 发现许多库存预存的请求报错。">
+  <meta name="author" content="Colin Miao">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="记一次负载测试中出现select for update悲观锁产生的问题">
+  <meta name="twitter:description" content="在一次release 开发过程中, QA team 在做load test 的时候 发现许多库存预存的请求报错。">
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="记一次负载测试中出现select for update悲观锁产生的问题">
+  <meta property="og:description" content="在一次release 开发过程中, QA team 在做load test 的时候 发现许多库存预存的请求报错。">
+  
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico" />
+  <link href="/assets/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+  
+  <!-- Bootstrap Core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="canonical" href="http://WildMeowth.github.io/2020/06/oracle-block/">
+  <link rel="alternate" type="application/rss+xml" title="Wild Meowth" href="http://WildMeowth.github.io/feed.xml">
+  
+  <!--站长统计-->
+  <!--<meta name="google-site-verification" content="" />-->
+  <meta name="baidu-site-verification" content="" />
+
+  
+  
+  <!--阅读统计-->
+  <!--  <script async="" src="https://www.google-analytics.com/analytics.js"></script>-->
+  <!--不蒜子的访问统计-->
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <!-- require APlayer -->
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script> -->
+  <!-- require MetingJS -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+  <meting-js
+    server="netease"
+    type="song"
+    id="386844"
+    fixed="true"
+    autoplay="false"
+    lrc-type="1">
+  </meting-js> -->
+</head>
+
+
+  <body>
+    <div class="grey-div d-none"></div>
+    <div class="subscribe-content d-none">
+        <img src="/assets/images/wechatQR.jpg"/>
+    </div>
+    
+    <span class="mobile btn-mobile-menu">
+      <i class="fa fa-list btn-mobile-menu__icon"></i>
+      <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+  </span>
+  
+    
+      
+      <nav class="header-navigation navbar-custom nav_post ">
+  <ul class="header-ul">
+    
+      <li class="header-item"><a href="/home/" target="_blank" title="My Prfiles">首页</a></li>
+    
+      <li class="header-item"><a href="/aboutme" target="" title="About me">关于</a></li>
+    
+    <li class="header-item"><a href="/" title="Blog" class="blog-button">博客</a></li>
+    
+    <li class="header-item btn-search-icon"><a class href="javascript:void(0)"><i class="fa fa-search"></i></a></li>
+  </ul>
+  <div class="desk__d-none"><nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+  
+
+  
+  <!-- Github -->
+  <li class="navigation__item">
+    <a href="https://github.com/WildMeowth" title="@WildMeowth 的 Github" target="_blank">
+      <i class='social fa fa-github'></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+  
+  
+  
+
+  
+
+  <!-- RSS -->
+  <li class="navigation__item">
+    <a href="/feed.xml" rel="author" title="RSS" target="_blank">
+      <i class='social fa fa-rss'></i>
+      <span class="label">RSS</span>
+    </a>
+  </li>
+
+  
+  <!-- Email -->
+  <li class="navigation__item">
+    <a href="mailto:sddzok@163.com" title="Contact me">
+      <i class='social fa fa-envelope'></i>
+      <span class="label">Email</span>
+    </a>
+  </li>
+  
+
+  </ul>
+</nav>
+</div>
+</nav>
+        <header class="row margin-zero post__header-header  " style="background-image: url('/'); ">
+          
+          <div class="content-wrapper post-content__wrapper">
+            <div class="content-wrapper__inner">
+              <div class="post-header
+              col-lg-8 col-lg-offset-2
+              col-md-10 col-md-offset-1
+              post-container">
+                <div class="post-meta">
+                <!--<time datetime="2020-06-02 12:43:11 +0800" itemprop="datePublished" class="post-meta__date date">2020-06-02</time> &#8226; <span class="post-meta__tags tags">Oracle</span>-->
+                  <a title="类别：Database" href="/categories/#Database" class="post-meta__tags tags categories">Database</a><a title="标签：Oracle" href="/tags/#Oracle" class="post-meta__tags tags">Oracle</a> &#8226; View <span id="busuanzi_value_page_pv"></span> times.
+                </div>
+                <h1 class="post-title">记一次负载测试中出现select for update悲观锁产生的问题</h1> 
+                <div class="post-from">posted by 野猫 on <a href="/dates/#2020"><time datetime="2020-06-02 12:43:11 +0800" itemprop="datePublished" class="post-meta__date date">June 2, 2020</time></a></div>
+              </div>
+            </div>
+          </div>
+        </header>
+    
+    
+    <div class="content-wrapper post-content__wrapper">
+        <div class="content-wrapper__inner">
+            <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+            <div class="row"> 
+  <article class="post-container post-container--single 
+                  col-lg-8 col-lg-offset-2
+                  col-md-10 col-md-offset-1
+                  post-container" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <section class="post">
+        
+        <blockquote>
+        <p>
+        版权声明：本文为 @WildMeowth 的原创文章，可以转载，但请务必注明作者和出处！！！原文链接：<a href="http://WildMeowth.github.io/2020/06/oracle-block/">wildmeowth</a>
+        </p>
+        </blockquote>
+        
+      <p>在一次release 开发过程中, QA team 在做load test 的时候 发现许多库存预存的请求报错。</p>
+
+<p>db发现有 row lock 的提醒， 技术支持查看Oracle报告时发现另一个release order to dbs(订单release到dbs的系统)的接口中用到了select for update 语句</p>
+
+<h2 id="以下是当时的业务逻辑">以下是当时的业务逻辑</h2>
+
+<ol>
+  <li>The agent <code class="language-plaintext highlighter-rouge">CatChinaReleaseOrderAgent</code> start a
+A series of tasks are executed include the <code class="language-plaintext highlighter-rouge">FOR UPDATE</code> SQL and <code class="language-plaintext highlighter-rouge">CATPubRelOrdToIIBSyncService</code></li>
+  <li>` CATPubRelOrdToIIBSyncService ` will connect to IIB MQ with LDAP username and password.</li>
+  <li>Something wrong with LDAP service and it may cost a lot of time to connect to IIB MQ.</li>
+  <li>` CATPubRelOrdToIIBSyncService ` will be blocked, and <code class="language-plaintext highlighter-rouge">FOR UPDATE</code> will be blocked, so it impact the  <code class="language-plaintext highlighter-rouge">SCWC_SDF_reserveAvailableInventory</code> API.</li>
+</ol>
+
+<p>由于一个事务中使用了<code class="language-plaintext highlighter-rouge">select for update</code>, 同一个事务中的另一个同步服务去连接IIB MQ的时候， 由于外部系统网络缓慢，花费了很长的时间连接, <code class="language-plaintext highlighter-rouge">for update</code> 长时间row lock. 这时候如果有其他服务调用相同数据，会被长时间阻塞。</p>
+
+<h2 id="解决方案">解决方案</h2>
+<p>事实上技术中心不允许使用 select for update 悲观锁，尤其是在大量业务逻辑的情况下，至于原有业务逻辑可以使用其他处理方案进行替代。如必须使用 select for update，须与架构部讨论后才可使用。</p>
+
+<p>但由于本案例中的<code class="language-plaintext highlighter-rouge">FOR UPDATE</code> 语句所在代码属于IBM 提供的OOTB 代码, 不适合修改， 于是考虑将<code class="language-plaintext highlighter-rouge">FOR UPDATE</code> 同一个事务中的后续同步服务改成异步服务， 让它成为新的事务, 不干扰原本事务, 减少<code class="language-plaintext highlighter-rouge">FOR UPDATE</code> 占用时间。本案中将<code class="language-plaintext highlighter-rouge">CATPubRelOrdToIIBSyncService</code> 同步改成了  <code class="language-plaintext highlighter-rouge">CATPubRelOrdToIIBAsyncService</code>异步服务。</p>
+
+    </section>
+  </article>
+
+  <!-- Side Catalog Container -->
+  
+  <div class="
+      col-lg-2 col-lg-offset-0
+      visible-lg-block
+      sidebar-container
+      catalog-container">
+      <div class="side-catalog">
+          <hr class="hidden-sm hidden-xs">
+          <h5 class="exclude">
+              <a class="catalog-toggle" href="#">CATALOG</a>
+          </h5>
+          <ul class="catalog-body"></ul>
+      </div>
+  </div>
+  
+</div>
+<div class="row">
+  <div class="post-header
+                  col-lg-8 col-lg-offset-2
+                  col-md-10 col-md-offset-1">
+    <section class="read-more">
+   
+   
+   <div class="read-more-item">
+       <span class="read-more-item-dim">最近的文章</span>
+       <a class="post-content" href="/2020/06/oracle-optmistic-locking-and-blcoking/" title="link to Oracle DML 操作的死锁与阻塞">
+            <h2 class="post-list__post-title post-title">Oracle DML 操作的死锁与阻塞</h2>
+            <p class="excerpt">项目中经常出现数据库阻塞和死锁的情况且数据库DML操作会比较常见，由此引发思考DML 操作数据库DML 语句常用关键字: insert、update、delete、select等阻塞与死锁其中insert、update、delete 以及 select for update都会在失误提交或回滚前上锁（表的共享锁，行上的排它锁）当事务1一直没提交或回滚，另一个事务2操作同一行时就会等待锁释放而造成阻塞而若事务1操作表1行1且未提交或回滚，事务2操作表2行2未提交，此时事务1操作表2行2，事务...&hellip;</p>
+       </a>
+       <div class="post-list__meta"><a href="/dates/#2020"><time datetime="2020-06-03 11:38:22 +0800" class="post-list__meta--date date">2020-06-03</time></a> &#8226; <a title="类别：Database" href="/categories/#Database" class="post-list__meta--tags tags categories">Database</a><a title="标签：Oracle" href="/tags/#Oracle" class="post-list__meta--tags tags">Oracle</a>&nbsp;&nbsp;<a class="btn-border-small" href=/2020/06/oracle-optmistic-locking-and-blcoking/>继续阅读</a></div>
+   </div>
+   
+   
+   
+   
+   <div class="read-more-item">
+       <span class="read-more-item-dim">更早的文章</span>
+       <a class="post-content" href="/2019/11/jvm-gc/" title="link to JVM GC 垃圾收集器 （一）">
+            <h2 class="post-list__post-title post-title">JVM GC 垃圾收集器 （一）</h2>
+            <p class="excerpt">在了解JVM 的过程中，就不得不提到各代的垃圾收集器。Stop the world。Serial &amp;&amp; Serial OldSerial 和 Serial Old 分别作用于新生代和老年代。属于单线程，在GC时Stop the world，暂停其他线程直至收集结束。Serial作用于新生代，由于新生代的对象产生及消逝比较频繁存活少，使用标记Copy 复制算法。Serial Old 是作用于老年代存活率高， 老年代的对象使用标记整理算法。只能作用小内存(几十-几百M)，不然s...&hellip;</p>
+       </a>
+       <div class="post-list__meta"><a href="/dates/#2019"><time datetime="2019-11-02 18:52:24 +0800" class="post-list__meta--date date">2019-11-02</time></a> &#8226; <a title="类别：JAVA" href="/categories/#JAVA" class="post-list__meta--tags tags categories">JAVA</a><a title="标签：JVM" href="/tags/#JVM" class="post-list__meta--tags tags">JVM</a>&nbsp;&nbsp;<a class="btn-border-small" href=/2019/11/jvm-gc/>继续阅读</a></div>
+   </div>
+   
+</section>
+
+    <!-- 多说评论框 start -->
+	<div id="comments" class="ds-thread" data-thread-key="/2020/06/oracle-block" data-title="记一次负载测试中出现select for update悲观锁产生的问题" data-url="http://WildMeowth.github.io/2020/06/oracle-block/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"icurious"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+
+
+<!-- 评论功能 -->
+<!--<section class="post-comments">
+  
+    <div id="disqus_thread"></div>
+    <script>
+    
+    var disqus_config = function () {
+        this.page.url = "http://WildMeowth.github.io/2020/06/oracle-block/";
+        this.page.identifier = "/2020/06/oracle-block/";
+    };
+
+    var disqus_shortname = 'WildMeowth';
+    
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>要查看<a href="http://disqus.com/?ref_noscript"> Disqus </a>评论，请启用 JavaScript</noscript>
+    
+  
+  
+  
+  
+</section>-->
+
+    <hr class="post-list__divider full-width" />
+  </div>
+</div>
+
+            
+
+<section class="row footer no-border">
+    <footer>
+        <span class="footer__copyright footer-contact_us">
+            联系我：    
+            
+
+            
+            <!-- Github -->
+                <a href="https://github.com/WildMeowth" title="@WildMeowth 的 Github" target="_blank">
+                    <i class='social fa fa-github'></i>
+                </a>
+            
+
+            
+
+            
+
+            
+            <!-- Email -->
+                <a href="mailto:sddzok@163.com" title="Contact me">
+                    <i class='social fa fa-envelope'></i>
+                </a>
+            
+        </span>
+    	<!-- <span class="footer__copyright">本站点采用<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享 署名-非商业性使用-相同方式共享 4.0 国际 许可协议</a></span> -->
+        <span class="footer__copyright">
+            Site powered by <a href="https://jekyllrb.com">Jekyll</a> & <a href="https://pages.github.com">Github Pages</a> 
+            <!-- 于 2022-05-28 生成  -->
+            .<a class="br"><br/></a> Theme designed by <a href="https://github.com/wildmeowth"><a href="http://WildMeowth.github.io">@WildMeowth</a></a> 
+             - &copy; 2022
+        </span>
+        <!--访问次数统计-->
+        <span class="footer__copyright">
+            <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+            <span id="busuanzi_container_site_uv">，访客数<span id="busuanzi_value_site_uv"></span>人次</span>
+        </span>
+        
+    </footer>
+</section>
+
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+
+<script type="text/javascript" src="/js/main.js"></script>
+
+<script type="text/javascript" src="/js/asidenav.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon,.btn-search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'article.post-container.active'
+        } else {
+            _containerSelector = 'article.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1:not(".post-title"),h2,h3,h4,h5:not(".exclude"),h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<script>
+    var OriginTitle = document.title;
+    var titleTime;
+    document.addEventListener('visibilitychange', function () {
+        if (document.hidden) {
+            $('[rel="icon"]').attr('href', "/assets/images/cry.ico");
+            $('[rel="shortcut icon"]').attr('href', "/assets/images/cry.ico");
+            document.title = '⊙﹏⊙ 宝，不要离开我好吗！';
+            clearTimeout(titleTime);
+        }
+        else {
+            $('[rel="icon"]').attr('href', "/assets/images/favicon.ico");
+            $('[rel="shortcut icon"]').attr('href', "/assets/images/favicon.ico");
+            document.title = '\\^o^/ 呀呼！我就知道你会回来的' + OriginTitle;
+            titleTime = setTimeout(function () {
+                document.title = OriginTitle;
+            }, 2000);
+        }
+    });
+</script>
+
+
+
+    
+  </body>
+
+</html>
