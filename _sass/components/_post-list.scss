@@ -3,7 +3,7 @@
 // ------------------------------
 
 .post-list {
-  margin: 0;
+  margin: -15px 0 0 0;
   padding: 0;
   list-style-type: none;
   text-align: left;
@@ -11,16 +11,16 @@
   li {
     margin: 0 0 2.2em 0;
 
-    &:last-child {
-
-      hr {
-        display: none;
-      }
-
-    }
-
   }
 
+}
+.post-content:hover {
+  h2 {
+    color:$wildmeowth-hover-color2;
+  }
+  p{
+    color:#3bb3bb;
+  }
 }
 
   .post-list__post-title {
@@ -28,15 +28,7 @@
     margin-bottom: .2em;
     font-size: 1.5em;
     line-height: 1.3em;
-
-    a {
-      color: $gray-darkest;
-
-      &:hover {
-        color: $hover-color;
-      }
-
-    }
+    color: $wildmeowth-gray-darkest;
 
   }
 
@@ -44,12 +36,25 @@
     display: block;
     margin: .7em 0 0 0;
     font-size: .9em;
-    color: darken($gray, 2%);
+    color: darken($wildmeowth-gray, 2%);
+    line-height: 1em;
+    .tags{
+      color: $wildmeowth-white;
+      background-color: $wildmeowth-blue;
+      padding: 1px 5px;
+      border-radius: 2px;
+      @media (max-width: $wildmeowth-sm-width) {
+        padding: 1px;
+      }
+    }
+    .categories{
+      background-color: $wildmeowth-gray-dark;
+    }
   }
 
     .post-list__meta--date {
       margin-right: .5em;
-      color: darken($gray, 2%);
+      color: darken($wildmeowth-gray, 2%);
     }
 
     .post-list__meta--tags {
@@ -59,5 +64,5 @@
   .post-list__divider {
     width: 30%;
     margin: 2.2em 0 2.1em 0;
-    border-top: 1px solid $gray-light;
+    border-top: 1px solid $wildmeowth-gray-light;
   }

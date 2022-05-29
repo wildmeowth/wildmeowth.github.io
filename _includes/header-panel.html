@@ -1,0 +1,57 @@
+<header class="panel-cover panel-cover--collapsed" style="background-image: url('/assets/images/background-cover.jpg')">
+  <div class="panel-main">
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+        <a title="前往 {{ site.title }} 的主页" class="js-showFull"><img src="/assets/images/avatar.jpg" width="80" alt="{{ site.title }} logo" class="panel-cover__logo logo" /></a>
+        <h1 class="panel-cover__title panel-title"><a title="link to homepage for {{ site.title }}" class="js-showFull">{{ site.title }}</a></h1>
+        {% if site.subtitles %}
+        <span class="js-showFull panel-cover__subtitle panel-subtitle blogtitle"></span>
+        <script src="{{ "/js/typed.js " | prepend: site.baseurl }}"></script>
+        <script>
+          var blogtitles = [];
+          {% for subtitle in site.subtitles %}
+            blogtitles.push('{{ subtitle }}');
+          {% endfor %}
+          blogtitles.sort(function () {
+            return Math.random() - 0.5;
+          })
+          blogtitles.unshift('网页也正在凝视着你');
+          blogtitles.unshift('当你在凝视着网页的时候');
+          var typed = new Typed(".blogtitle", {
+              strings: blogtitles,
+              startDelay: 288,
+              typeSpeed: 128,
+              loop: true,
+              backSpeed: 88,
+              showCursor: true
+          });
+        </script>
+        {% endif %}
+        <hr class="panel-cover__divider" />
+        <p class="js-showFull panel-cover__description">{{ site.description }}</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+        {% if site.welcome_message %}
+        <p class="panel-cover__description">{{ site.welcome_message }}</p>
+        {% endif %}
+        
+        <div class="navigation-wrapper">
+          <div class="navigation-items">
+            <nav class="cover-navigation cover-navigation--primary">
+              <ul class="navigation">
+                {% for item in site.nav %}
+                  <li class="navigation__item"><a href="{{item.url}}" target="{% if item.url == '/home/' %}_blank{% endif %}" title="{{item.description}}">{{item.title}}</a></li>
+                {% endfor %}
+                <li class="navigation__item"><a href="/" title="{{site.blog_button.description}}" class="blog-button">{{site.blog_button.title}}</a></li>
+                {% if site.subscribe_button %}<li class="navigation__item"><a class="subscribe-button" title="{{site.subscribe_button.description}}">{{site.subscribe_button.title}}</a></li>{% endif %}
+                <li class="navigation__item btn-search-icon"><a class="index-search__text">搜索</a><a class="index-search__icon" href="javascript:void(0)"><i class="fa fa-search"></i></a></li>
+              </ul>
+            </nav>
+          </div>
+          
+          <div class="navigation-social">{% include social.html %}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

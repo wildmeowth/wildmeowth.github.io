@@ -1,0 +1,42 @@
+---
+layout: default
+permalink: /asc/
+pagination: 
+  enabled: true
+  permalink: '/page:num/' 
+  sort_reverse: false 
+  indexpage: 'index'
+sortprekey: '/asc/'
+---
+
+<div class="main-post-list">
+
+  {% include menu-archive.html %}
+
+  <div class="row">
+    <ol class="col-lg-9 col-lg-offset-1 col-md-9 col-md-offset-1 col-sm-12 col-xs-12 post-list">
+      <div class="mobile__d-none"><a class="post__desc-text" href="/">最近在前</a></div>
+      <div class="desk__d-none post-asc">{% include pagination.html %}</div>
+      {% for post in paginator.posts %}
+      <li>
+        <a class="post-content" href="{{ post.url }}" title="访问 {{ post.title }}">
+          <h2 class="post-list__post-title post-title">{{ post.title }}</h2>
+          <p class="excerpt">{{ post.content | strip_html | strip_newlines | truncate: 200 }}&hellip;</p>
+        </a>
+        <div class="post-list__meta"><a href="/dates/#{{post.date | date: '%Y'}}"><time datetime="{{post.date | date: date_to_xmlschema}}" class="post-list__meta--date date">{{ post.date | date: "%F"}}</time></a> &#8226; <a title="类别：{{post.categories}}" href="/categories/#{{post.categories}}" class="post-list__meta--tags tags categories">{{post.categories | join:' ' }}</a><a title="标签：{{post.tags}}" href="/tags/#{{post.tags}}" class="post-list__meta--tags tags">{{ post.tags| join:' ' }}</a>&nbsp;&nbsp;<a class="btn-border-small" href={{ post.url }}>继续阅读</a></div>
+        <hr class="post-list__divider" />
+      </li>
+      {% endfor %}
+      
+      <div class="post-asc">{% include pagination.html %}</div>
+      <hr class="post-list__divider full-width desk__d-none" />
+    </ol>
+    <div class="col-lg-3 col-lg-offset-0 col-md-3 col-md-offset-0 col-sm-12 col-xs-12 paddingzero-mobile right-content">
+      <div class="search-icon"><a href="javascript:void(0)"><i class="fa fa-search"></i></a></div>
+      {% include fetured-tags.html %}
+      {% include about-me.html %}
+      {% include friends.html %}
+    </div>
+  </div>
+
+</div>

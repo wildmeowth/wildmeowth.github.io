@@ -1,0 +1,60 @@
+---
+layout: default
+---
+
+{% include menu-archive.html %}
+
+{%- assign tags = site.posts | group_by_exp: "post", "post.date | date: '%Y'" -%}
+
+<div class="tags-wrapper">
+  <ul class="tags">
+    <li>
+      {%- capture link -%}{{ page.permalink }}#{{ 'showAll' }}{%- endcapture -%}
+      <a class="tag show-all" href="{{ link | relative_url }}" data-id="showAll">
+        <span>
+          Show All
+        </span>
+        <sup>{{ site.posts.size }}</sup>
+      </a>
+    </li>
+    {%- for tag in tags -%}
+      <li>
+        {%- capture link -%}{{ page.permalink }}#{{ tag.name }}{%- endcapture -%}
+        <a class="tag tag-child"
+            data-sort="{{ site.posts.size | minus: tag.size | prepend: '0000' | slice: -4, 4 }}"
+            rel="{{ tag.size }}"
+            href="{{ link | relative_url }}"
+            data-id="{{tag.name}}">
+            <span>{{ tag.name }}</span>
+            <sup>{{ tag.size }}</sup>
+        </a> 
+      </li>
+    {%- endfor -%}
+  </ul>
+</div>
+
+{% comment %} Show posts by tag {% endcomment %}
+{%- for tag in tags -%}
+<div id="tag_{{ tag.name }}" class="js-byDateTags tags-content d-none">
+  <h2 class="tag-title">
+    {{ tag.name }}
+  </h2>
+  <ul class="post-list-by-tag">
+    {%- assign posts = tag.items -%}
+    {%- for post in posts -%}
+      <li>
+        <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+      </li>
+      <hr>
+    {%- endfor -%}
+  </ul>
+  <!-- <a href="#" onclick="backToTop()" class="back-to-top">Top &#8648;</a> -->
+</div>
+{%- endfor -%}
+<div style="margin:50px;"></div>
+<!-- <script>
+  function backToTop() {
+    const main = document.getElementById("site-main");
+    main.scrollTop = 0;
+  }
+</script> -->

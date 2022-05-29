@@ -1,6 +1,39 @@
 # Blog - Jekyll
-This is **<font size=5>[my blog](https://wildmeowth.github.io/)</font>** which is based on the theme [Jekyll](http://jekyllrb.com). 
+This is **[my blog](https://wildmeowth.github.io/)**  which is based on the theme [Jekyll](http://jekyllrb.com). 
 
-## Licence
+<details>
+<summary>点击此处预览</summary>
 
-Great thanks to [Dale Anthony](https://github.com/daleanthony) and his [Uno](https://github.com/daleanthony/uno). Thanks to [onevcat](https://github.com/onevcat) about his [Vno Jekyll](https://github.com/onevcat/vno-jekyll) which is followed with Uno and be licensed as [Creative Commons Attribution 4.0 International](http://creativecommons.org/licenses/by/4.0/). See the link for more information.
+![Preview](/assets/images/myBlog.png)
+
+</details>
+
+## Local
+
+```
+$ gem install bundle
+$ bundler install
+```
+
+then run `./scripts/serve` to start in dev at http://localhost:4000
+
+## Node
+if you use `Node` you should run `npm install` first,
+
+then
+#### Build
+
+`npm run build`
+
+#### Start
+
+`npm run dev`
+
+## Publish
+if you want to publish `_site` to github, ensure there is `node_modules` file in your project by run `npm install`,
+
+then run
+
+```
+npm run pub
+```

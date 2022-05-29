@@ -1,7 +1,14 @@
 # Basic
 title: Wild Meowth
-subtitle: 不以物喜，不以己悲
-# welcome_message: <a href="https://github.com/onevcat/vno-jekyll" target="_blank">Download the theme</a>
+subtitles: ['不以物喜，不以己悲', 
+            'Stay Hungry, Stay Foolish', 
+            '时光之外，山水之间', 
+            '断剑重铸之日，骑士归来之时',  
+            '希望能成为有趣的人', 
+            '给时光以生命 给岁月以文明', 
+            '你好，请多指教', 
+            '你所热爱的，就是你的生活',  
+            '我很好奇！']
 description: 嗨，我是野猫(@WildMeowth)，一名天朝的代码搬运工。现居杭州，在杭州工作。目前处于学习状态。
 creator: <a href="http://WildMeowth.github.io">@WildMeowth</a>
 
@@ -12,24 +19,51 @@ permalink: /:year/:month/:title/
 # Format
 highlighter: rouge
 
+markdown: kramdown
+kramdown:
+  input: GFM                            # use Github Flavored Markdown !important
+  syntax_highlighter_opts:
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
+      start_line: 1
+
 # supported colors: blue, green, purple, red, orange or slate. If you need clear, leave it empty.
-cover_color: blue
+# cover_color: blue
 
 # The blog button should not be removed.
 blog_button:
     title: 博客
-    description: 访问博客
+    description: Blog
 
 # Navigation buttons in the front page.
 nav:
-    - {title: 简历, description: My Prfiles, url: '/nav/profile.html'}
-    - {title: 关于, description: About me, url: '/'}
-    - {title: 订阅, description: subscribe, url: '/'}
+    - {title: 首页, description: My Prfiles, url: '/home/'}
+    - {title: 关于, description: About me, url: '/aboutme'}
+    #- {title: 订阅, description: subscribe, url: '/'}
+
+# subscribe button
+# subscribe_button:
+#     title: 订阅
+#     description: subscribe
 
 # Pagination
-gems: [jekyll-paginate]
-paginate: 10
-paginate_path: "page/:num/"
+pagination:
+    enabled: true 
+    # debug: true
+    # collection: 'posts'
+    permalink: '/page/:num/' 
+    # category: 'posts' 
+    per_page: 6 
+    # sort_reverse: false 
+    # sort_field: 'date' 
+    limit: 0 
+    trail: 
+        before: 2 
+        after: 2 
+
+showpagenumlevel: 2
 
 # Comment
 comment:
@@ -38,9 +72,9 @@ comment:
     
 # Social
 social:
-    weibo: MxiaoHuoChai
+    #weibo: MxiaoHuoChai
     github: WildMeowth
-    twitter: JihanJobs
+    #twitter: JihanJobs
     #gplus: 107108267983477358170
     mail: sddzok@163.com
 
@@ -48,3 +82,24 @@ social:
 ga:
     # id: your_ga_id
     # host: your_host
+
+plugins:
+    - jekyll-paginate-v2
+
+include: [.gitattributes]
+
+exclude: [deploy.js, LICENSE, package.json, README.md, scripts]
+
+# Progressive Web Apps
+service-worker: true
+
+# Friends
+friends: [
+    {
+        title: "Evan Zou",
+        href: "https://evanzew.github.io/"
+    },{
+        title: "阿贝 (ABei)",
+        href: "https://jeepchenup.github.io/"
+    }
+]

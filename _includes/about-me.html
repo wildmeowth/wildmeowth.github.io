@@ -1,0 +1,11 @@
+<section class="fetured-tags">
+    <h5><a href="{{'/aboutme/' | prepend: site.baseurl }}">ABOUT ME</a></h5>
+    <div class="fetured-content">
+        <div class="text-left img">
+            <img src="/assets/images/avatar.jpg" alt="{{ site.title }} logo" class="logo"/>
+        </div>
+        <p>{{ site.description }}</p>
+        <div class="fetured-social">{% include social.html %}</div>
+    </div>
+    <hr class="post-list__divider">
+</section>

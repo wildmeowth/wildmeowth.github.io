@@ -1,13 +1,58 @@
-<section class="footer">
+
+{% if page.layout=='post' %}
+ {% assign noborder = 'no-border' %}
+{% endif %}
+<section class="row footer {{noborder}}">
     <footer>
-    	<span class="footer__copyright">本站点采用<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享 署名-非商业性使用-相同方式共享 4.0 国际 许可协议</a></span>
-        <span class="footer__copyright">由 <a href="https://jekyllrb.com">Jekyll</a> 于 {{ site.time | date: "%F" }} 生成，感谢 <a href="https://www.digitalocean.com/?refcode=30ed2d146762">Digital Ocean</a> 为本站提供稳定的 VPS 服务</span>
-        <span class="footer__copyright">本站{% if site.creator %}由 {{site.creator}} 创建，{% endif %}
-            <!--<a href="https://github.com/onevcat/vno-jekyll">-->采用 Vno - Jekyll</a> 作为主题。<!--您可以在 GitHub 找到<a href="https://github.com/onevcat/OneV-s-Den">本站源码</a>-->
+        <span class="footer__copyright footer-contact_us">
+            联系我：    
+            {% if site.social.weibo %}
+            <!-- Weibo -->
+                <a href="http://weibo.com/{{site.social.weibo}}" title="@{{site.social.weibo}} 的微博" target="_blank">
+                    <i class='social fa fa-weibo'></i>
+                </a>
+            {% endif %}
+
+            {% if site.social.github %}
+            <!-- Github -->
+                <a href="https://github.com/{{site.social.github}}" title="@{{site.social.github}} 的 Github" target="_blank">
+                    <i class='social fa fa-github'></i>
+                </a>
+            {% endif %}
+
+            {% if site.social.twitter %}
+            <!-- Twitter -->
+                <a href="http://twitter.com/{{site.social.twitter}}" title="@{{site.social.twitter}}" target="_blank">
+                    <i class='social fa fa-twitter'></i>
+                </a>
+            {% endif %}
+
+            {% if site.social.gplus %}
+            <!-- Google Plus -->
+                <a href="https://plus.google.com/{{site.social.gplus}}" rel="author" title="Google+" target="_blank">
+                    <i class='social fa fa-google-plus-square'></i>
+                </a>
+            {% endif %}
+
+            {% if site.social.mail %}
+            <!-- Email -->
+                <a href="mailto:{{site.social.mail}}" title="Contact me">
+                    <i class='social fa fa-envelope'></i>
+                </a>
+            {% endif %}
+        </span>
+    	<!-- <span class="footer__copyright">本站点采用<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享 署名-非商业性使用-相同方式共享 4.0 国际 许可协议</a></span> -->
+        <span class="footer__copyright">
+            Site powered by <a href="https://jekyllrb.com">Jekyll</a> & <a href="https://pages.github.com">Github Pages</a> 
+            <!-- 于 {{ site.time | date: "%F" }} 生成  -->
+            {% if site.creator %}.<a class="br"><br/></a> Theme designed by <a href="https://github.com/wildmeowth">{{site.creator}}</a> {% endif %}
              - &copy; {{site.time | date: "%Y"}}
-		</span>
-			 
-		<!--访问次数统计-->
-        <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+        </span>
+        <!--访问次数统计-->
+        <span class="footer__copyright">
+            <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+            <span id="busuanzi_container_site_uv">，访客数<span id="busuanzi_value_site_uv"></span>人次</span>
+        </span>
+        
     </footer>
 </section>

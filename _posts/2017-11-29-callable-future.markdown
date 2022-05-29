@@ -1,15 +1,11 @@
 ---
 layout: post
-title: Callable + Future 线程异步 - 野猫
+title: Callable + Future 线程异步
+author: 野猫
 date: 2017-11-29 16:12:31.000000000 +08:00
-tags: Callable Future , 线程 , 并发 , 异步
+tags: 多线程
+categories: JAVA
 ---
-
->版权声明：本文为 @WildMeowth
-的原创文章, 可以转载, 但请务必注明作者和出处！！！
-原文链接：[wildmeowth](http://wildmeowth.github.io/2017/11/callable-future/)
-
-
 
 Callable 接口和Runnable 接口相似, 但两者也有很关键的区别. Callable 可以返回结果, Runnable 不会返回结果. 因此相对来说Callable功能更加强大.
 

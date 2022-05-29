@@ -14,9 +14,12 @@
   display: inline-block;;
   vertical-align: top;
   width: 48%;
+  @media screen and (max-width: 720px) {
+    width: 100%;
+  }
 }
 
 .read-more-item-dim {
-  color: $hover-color;
+  color: $wildmeowth-hover-color;
   font-size: .8em;
 }

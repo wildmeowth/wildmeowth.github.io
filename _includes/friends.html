@@ -1,0 +1,11 @@
+<section class="fetured-tags">
+    <h5><a>FRIENDS</a></h5>
+    <div class="fetured-content">
+        <p>
+            {% for friend in site.friends %}
+            <a class="fetured-friend" href="{{friend.href}}">{{friend.title}}</a>
+            {% endfor %}
+        </p>
+    </div>
+    <hr class="post-list__divider">
+</section>

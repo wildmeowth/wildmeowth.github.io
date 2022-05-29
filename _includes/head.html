@@ -3,7 +3,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
+  <title>{% if page.title %}{{ page.title | escape }} - {% else %}{{ site.title | escape }} - {% endif %}野猫嗷嗷嗷</title>
   <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
   <meta name="author" content="Colin Miao">
 
@@ -15,9 +15,11 @@
   <meta property="og:title" content="{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}">
   <meta property="og:description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
   
-  <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
-  <link href="/assets/images/favicon.png" rel="shortcut icon" type="image/png">
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico" />
+  <link href="/assets/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
   
+  <!-- Bootstrap Core CSS -->
+  <link rel="stylesheet" href="{{ "/css/bootstrap.min.css" | prepend: site.baseurl }}">
   <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
 
@@ -26,14 +28,26 @@
   
   <!--站长统计-->
   <!--<meta name="google-site-verification" content="" />-->
-  <meta name="baidu-site-verification" content="lUsurUcqnk" />
+  <meta name="baidu-site-verification" content="" />
 
   
   
   <!--阅读统计-->
   <!--  <script async="" src="https://www.google-analytics.com/analytics.js"></script>-->
   <!--不蒜子的访问统计-->
-  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  <!--  <style type="text/css" adt="123"></style>-->
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   
+  <!-- require APlayer -->
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script> -->
+  <!-- require MetingJS -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+  <meting-js
+    server="netease"
+    type="song"
+    id="386844"
+    fixed="true"
+    autoplay="false"
+    lrc-type="1">
+  </meting-js> -->
 </head>

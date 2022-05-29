@@ -24,6 +24,7 @@
 // COMPONENTS
 // ------------------------------
 
+@import 'components/search.scss';
 @import 'components/panels.scss';
 @import 'components/buttons.scss';
 @import 'components/navigation.scss';
@@ -32,6 +33,10 @@
 @import 'components/post-list.scss';
 @import 'components/forms.scss';
 @import 'components/read-more.scss';
+@import 'components/snakebar.scss';
+@import 'components/drop.scss';
+@import 'components/side-catalog.scss';
+@import 'components/about.scss';
 
 // ------------------------------
 // MEDIA QUERIES
@@ -45,3 +50,9 @@
 
 @import 'animate.css';
 @import 'tomorrow.css';
+
+
+@import "archive";
+@import "menu-header";
+@import 'asidenav';
+@import "fetured-tags";

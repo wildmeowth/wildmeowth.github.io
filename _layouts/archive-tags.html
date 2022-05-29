@@ -1,0 +1,121 @@
+---
+layout: default
+---
+
+{% include menu-archive.html %}
+
+{% comment %} Check the type of archive {% endcomment %}
+{%- if page.type == 'categories' -%}
+  {%- assign tags = site.categories -%}
+{%- elsif page.type == 'tags' -%}
+  {%- assign tags = site.tags -%}
+{%- else -%}
+  {%- assign tags = none -%}
+{%- endif -%}
+
+{% comment %} Calculate the max count of tags {% endcomment %}
+{%- assign max_count = 0 -%}
+{%- for tag in tags -%}
+  {%- assign posts = tag[1] -%}
+  {%- if posts.size > max_count -%}
+    {%- assign max_count = posts.size -%}
+  {%- endif -%}
+{%- endfor -%}
+
+<div class="tags-wrapper">
+  <ul class="tags">
+    <li>
+      {%- capture link -%}{{ page.permalink }}#{{ 'showAll' }}{%- endcapture -%}
+      <a class="tag show-all" href="{{ link | relative_url }}" data-id="showAll">
+        <span>
+          Show All
+        </span>
+        <sup>{{ site.posts.size }}</sup>
+      </a>
+    </li>
+    {%- for i in (1..max_count) reversed -%}
+      {%- for tag in tags -%}
+        {%- if tag[0] contains ',' -%}
+        {%- else -%}
+          {%- assign tag_name = tag[0] -%}
+          {%- assign posts = tag[1] -%}
+          {%- if posts.size == i -%}
+            <li>
+              {%- capture link -%}{{ page.permalink }}#{{ tag_name }}{%- endcapture -%}
+              <a class="tag tag-child" 
+                  data-sort="{{ site.posts.size | minus: posts.size | prepend: '0000' | slice: -4, 4 }}"
+                  rel="{{ posts.size }}"
+                  href="{{ link | relative_url }}"
+                  data-id="{{tag_name}}">
+                <span>
+                    {{ tag_name }}
+                </span>
+                <sup>{{ posts.size }}</sup>
+              </a>
+            </li>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endfor -%}
+  </ul>
+</div>
+
+{% comment %} Show posts by tag {% endcomment %}
+{%- for i in (1..max_count) reversed -%}
+  {%- for tag in tags -%}
+    {%- if tag[0] contains ',' -%}
+    {%- else -%}
+      {%- assign tag_name = tag[0] -%}
+      {%- assign posts = tag[1] -%}
+      {%- if posts.size == i -%}
+      <div id="tag_{{ tag_name }}" class="js-tags tags-content d-none">
+        {%- assign currentdate = '1995' -%}
+        {%- for post in posts -%}
+        {%- assign ldate = post.date | date: '%Y' -%}
+          {%- if currentdate == ldate -%}
+          <ul class="post-list-by-tag">
+            <li>
+              <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+            </li>
+            <hr>
+          </ul>
+          {%- else -%}
+          {%- assign currentdate = ldate -%}
+          <h2 class="tag-title">
+              {{ currentdate }}
+          </h2>
+          <ul class="post-list-by-tag">
+            <li>
+              <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+            </li>
+            <hr>
+          </ul>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endfor -%}
+
+
+{% comment %} Show all by date {% endcomment %}
+{%- assign tagsByDate = site.posts | group_by_exp: "post", "post.date | date: '%Y'" -%}
+{%- for tag in tagsByDate -%}
+<div id="tag_{{ tag.name }}" class="js-byDateTags tags-content d-none">
+  <h2 class="tag-title">
+    {{ tag.name }}
+  </h2>
+  <ul class="post-list-by-tag">
+    {%- assign postsByDate = tag.items -%}
+    {%- for post in postsByDate -%}
+      <li>
+        <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+      </li>
+      <hr>
+    {%- endfor -%}
+  </ul>
+  <!-- <a href="#" onclick="backToTop()" class="back-to-top">Top &#8648;</a> -->
+</div>
+{%- endfor -%}
+<div style="margin:50px;"></div>

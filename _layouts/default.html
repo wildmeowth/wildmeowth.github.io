@@ -4,16 +4,44 @@
   {% include head.html %}
 
   <body>
-    <div style="margin:0 auto;padding:0;display:none;"><img src="../assets/images/logo.jpg"></div>
-    <span class="mobile btn-mobile-menu">
-        <i class="fa fa-list btn-mobile-menu__icon"></i>
-        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
-    </span>
+    <div class="grey-div d-none"></div>
+    <div class="subscribe-content d-none">
+        <img src="/assets/images/wechatQR.jpg"/>
+    </div>
     
-    {% include side-panel.html %}
-
-    <div class="content-wrapper">
+    <span class="mobile btn-mobile-menu">
+      <i class="fa fa-list btn-mobile-menu__icon"></i>
+      <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+  </span>
+  
+    {% if page.layout=='post' %}
+      {% assign contentClass='post-content__wrapper' %}
+      {% include header-menu.html %}
+        <header class="row margin-zero post__header-header {% if page.header-img %}large{% endif %} {% if page.navcolor %}{{ page.navcolor }}{% endif %}" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% endif %}'); ">
+          {% if page.header-img %}<div class="header-mask"></div>{% endif %}
+          <div class="content-wrapper {{contentClass}}">
+            <div class="content-wrapper__inner">
+              <div class="post-header
+              col-lg-8 col-lg-offset-2
+              col-md-10 col-md-offset-1
+              post-container">
+                <div class="post-meta">
+                <!--<time datetime="{{page.date | date: date_to_xmlschema}}" itemprop="datePublished" class="post-meta__date date">{{page.date | date: "%F"}}</time> &#8226; <span class="post-meta__tags tags">{{page.tags}}</span>-->
+                  <a title="类别：{{page.categories}}" href="/categories/#{{page.categories}}" class="post-meta__tags tags categories">{{page.categories | join:' ' }}</a><a title="标签：{{page.tags}}" href="/tags/#{{page.tags}}" class="post-meta__tags tags">{{page.tags | join:' '}}</a> &#8226; View <span id="busuanzi_value_page_pv"></span> times.
+                </div>
+                <h1 class="post-title">{{ page.title }}</h1> 
+                <div class="post-from">posted by {% if page.author %}{{ page.author }}{% else %}{{site.creator}}{% endif %} on <a href="/dates/#{{page.date | date: '%Y'}}"><time datetime="{{page.date | date: date_to_xmlschema}}" itemprop="datePublished" class="post-meta__date date">{{ page.date | date: "%B %-d, %Y" }}</time></a></div>
+              </div>
+            </div>
+          </div>
+        </header>
+    {% else %}
+      {% include header-panel.html %}{% include header-menu.html %}
+    {% endif %}
+    
+    <div class="content-wrapper {{contentClass}}">
         <div class="content-wrapper__inner">
+            {% include search.html %}
             {{ content }}
             {% include footer.html %}
         </div>

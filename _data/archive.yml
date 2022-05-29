@@ -1,0 +1,12 @@
+- type: dates
+  title: 按时间
+  url: /dates/
+  class: menu-first
+- type: categories
+  title: 按类别
+  url: /categories/
+  class: menu-second
+- type: tags
+  title: 按标签
+  url: /tags/
+  class: menu-third

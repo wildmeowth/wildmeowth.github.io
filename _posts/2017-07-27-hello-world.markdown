@@ -1,8 +1,13 @@
 ---
 layout: post
-title: Hello World - 野猫
+title: Hello World
+author: 野猫
 date: 2017-07-27 15:32:24.000000000 +08:00
-tags: WildMeowth , 博客
+tags: WildMeowth
+categories: 博客
+type: noNeedOrginalText
+header-img: assets/images/post-bg-myblog.jpg
+navcolor:   "invert"
 ---
 
 ## 博客诞生

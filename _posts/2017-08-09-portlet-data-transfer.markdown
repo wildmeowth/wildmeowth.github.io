@@ -1,13 +1,11 @@
 ---
 layout: post
-title: Websphere portlet间数据传递 - 野猫
+title: Websphere portlet间数据传递
+author: 野猫
 date: 2017-08-09 16:43:31.000000000 +08:00
-tags: webshpere portal , portlet数据传递
+tags: Webshpere-Portal
+categories: IBM
 ---
-
->版权声明：本文为 @WildMeowth
-的原创文章, 可以转载, 但请务必注明作者和出处！！！
-原文链接：[wildmeowth](http://wildmeowth.github.io/2017/08/portlet-data-transfer/)
 
 ## 摘要
 

@@ -18,17 +18,17 @@ input[type="tel"] {
   width: 240px;
   padding: 1em 1em;
   background: #FFF;
-  border: 1px solid $gray-light;
-  border-radius: $border-radius;
+  border: 1px solid $wildmeowth-gray-light;
+  border-radius: $wildmeowth-border-radius;
   font-size: .9em;
-  color: $gray-darker;
+  color: $wildmeowth-gray-darker;
 
   &:focus {
-    border-color: $secondary-color;
+    border-color: $wildmeowth-secondary-color;
   }
 
   @include placeholder {
-    color: $gray;
+    color: $wildmeowth-gray;
   }
 
 }

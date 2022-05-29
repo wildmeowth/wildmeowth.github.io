@@ -1,0 +1,6 @@
+#!/bin/sh
+
+rm -rf ./_site
+bundle exec jekyll build --trace
+node ./deploy.js
+rm -rf ./_site

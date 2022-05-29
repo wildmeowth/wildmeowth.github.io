@@ -1,13 +1,11 @@
 ---
 layout: post
-title: Spring Protlet MVC - 使用Spring 3 MVC创建一个基本的websphsere portlet - 野猫
+title: Spring Protlet MVC - 使用Spring 3 MVC创建一个基本的websphsere portlet
+author: 野猫
 date: 2017-09-25 13:58:12.000000000 +08:00
-tags: webshpere portal , SpringMVC Portlet
+tags: Webshpere-Portal
+categories: IBM
 ---
-
->版权声明：本文为 @WildMeowth
-的原创文章, 可以转载, 但请务必注明作者和出处！！！
-原文链接：[wildmeowth](http://wildmeowth.github.io/2017/09/spring3mvc-portlet-create/)
 
 ## 摘要
 

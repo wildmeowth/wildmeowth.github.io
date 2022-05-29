@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "build": "./scripts/build",
+    "dev": "bundle exec jekyll serve --open-url",
+    "pub": "./scripts/publish"
+  },
+  "devDependencies": {
+    "gh-pages": "^1.0.0"
+  }
+}

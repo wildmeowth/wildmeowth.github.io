@@ -1,0 +1,19 @@
+---
+layout: page
+permalink: /aboutme/
+title: 关于我
+multilingual: true
+---
+
+{% include multilingual-sel.html %}
+<!-- Chinese Version -->
+<div class="zh page-container">
+  {% capture about_zh %}{% include about/zh.md %}{% endcapture %}
+  {{ about_zh | markdownify }}
+</div>
+
+<!-- English Version -->
+<div class="en page-container">
+  {% capture about_en %}{% include about/en.md %}{% endcapture %}
+  {{ about_en | markdownify }}
+</div>

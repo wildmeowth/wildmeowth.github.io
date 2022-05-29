@@ -14,40 +14,84 @@
   }
 
 .panel-title {
-  margin: 0 0 5px 0;
+  margin: 30px 0 5px 0;
   font-size: 2.5em;
   letter-spacing: 4px;
   color: #FFF;
 }
 
 .panel-subtitle {
-  font-family: $serif-font;
+  font-family: $wildmeowth-serif-font;
   font-size: 1.2em;
   font-weight: lighter;
   letter-spacing: 3px;
-  color: $gray;
+  color: $wildmeowth-gray;
   -webkit-font-smoothing: antialiased;
 }
 
 // ------------------------------
 // COVER PANEL
 // ------------------------------
-
 .panel-cover {
-  display: block;
-  position: fixed;
-  z-index: 900;
   width: 100%;
-  max-width: none;
   height: 100%;
-  background: url(../images/background-cover.jpg) top left no-repeat $gray-darker;
+  display: block;
+  background: url(../images/background-cover.jpg) no-repeat $wildmeowth-gray-darker;
   background-size: cover;
-}
+  background-position: 50% 10%;
+  position: fixed;
 
-  .panel-cover--collapsed {
-    width: 30%;
-    max-width: 700px;
+  .index-search__text {
+    display: block;
+    cursor: pointer;
   }
+  .index-search__icon{
+    display: none;
+    cursor: pointer;
+  }
+
+  &.panel-cover--collapsed {
+    display: block;
+    padding: 0;
+    height: 40%;
+    min-height: 320px;
+    position: relative;
+    background-position: 0% 82%;
+
+    .panel-cover__divider,
+    .panel-cover__description {
+      display:none;
+    }
+    .navigation-wrapper {
+      display: none;
+    }
+    .navigation__item {
+      .index-search__text {
+        display: none;
+      }
+      .index-search__icon{
+        display: block;
+      }
+    }
+    
+    .cover-navigation {
+      margin-top: 20px;
+    }
+
+    .panel-main__inner {
+      display: block;
+      padding: 70px 0;
+      z-index: 0;
+    }
+
+    .panel-cover__logo {
+      width: 60px;
+      border-width: 2px;
+    }
+    
+  }
+
+}
 
   .panel-cover--overlay {
     display: block;
@@ -58,10 +102,6 @@
     bottom: 0;
     left: 0;
     @include linear-gradient(140deg, rgba(#444444,.6) 20%, rgba(#000000,.9));
-  }
-
-  .panel-cover__logo {
-    margin-bottom: .2em;
   }
 
   .panel-cover__description {
@@ -136,27 +176,27 @@
 // ------------------------------
 
 .cover-blue {
-  @include linear-gradient(140deg, rgba($blue,.6) 20%, rgba(darken($blue, 20%),.8));
+  @include linear-gradient(140deg, rgba($wildmeowth-blue,.6) 20%, rgba(darken($wildmeowth-blue, 20%),.8));
 }
 
 .cover-green {
-  @include linear-gradient(140deg, rgba($green,.6) 20%, rgba(darken($green, 20%),.8));
+  @include linear-gradient(140deg, rgba($wildmeowth-green,.6) 20%, rgba(darken($wildmeowth-green, 20%),.8));
 }
 
 .cover-purple {
-  @include linear-gradient(140deg, rgba($purple,.6) 20%, rgba(darken($purple, 20%),.8));
+  @include linear-gradient(140deg, rgba($wildmeowth-purple,.6) 20%, rgba(darken($wildmeowth-purple, 20%),.8));
 }
 
 .cover-red {
-  @include linear-gradient(140deg, rgba(darken($red, 30%),.6) 20%, rgba(darken($red, 50%),.8));
+  @include linear-gradient(140deg, rgba(darken($wildmeowth-red, 30%),.6) 20%, rgba(darken($wildmeowth-red, 50%),.8));
 }
 
 .cover-orange {
-  @include linear-gradient(140deg, rgba(darken($orange, 30%),.6) 20%, rgba(darken($orange, 50%),.8));
+  @include linear-gradient(140deg, rgba(darken($wildmeowth-orange, 30%),.6) 20%, rgba(darken($wildmeowth-orange, 50%),.8));
 }
 
 .cover-slate {
-  @include linear-gradient(140deg, rgba($slate,.6) 20%, rgba(darken($slate, 20%),.8));
+  @include linear-gradient(140deg, rgba($wildmeowth-slate,.6) 20%, rgba(darken($wildmeowth-slate, 20%),.8));
 }
 
 .cover-disabled {

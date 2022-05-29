@@ -1,0 +1,21 @@
+{% if site.data.archive %}
+      <div class="aside-nav bounceInUp animated desk__d-none" id="aside-nav"><label for="" class="aside-menu" title="按住拖动">菜单</label>
+      {% for item in site.data.archive %}
+            <a href="{{ item.url | relative_url }}#showAll" title="{{ item.title }}" class="menu-item {{ item.class }}">{{ item.title }}</a>
+      {% endfor %}
+      </div>
+
+      {% if page.title == 'Archive' %}
+      <div class="wild__drop-content mobile__d-none">
+            <div class="wild-drop">
+            {% for item in site.data.archive %}
+                  {% if page.type == item.type %}
+                  <div class="option active" data-value="{{ item.url }}">{{ item.title }}</div>
+                  {% else %}
+                  <div class="option" data-value="{{ item.url }}">{{ item.title }}</div>
+                  {% endif %}
+            {% endfor %}
+            </div>
+      </div>
+      {% endif %}
+{% endif %}

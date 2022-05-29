@@ -1,0 +1,144 @@
+.sel-lang {
+    -webkit-appearance: none;
+    margin-top: 15px;
+    color: $wildmeowth-hover-color2;
+    border-color: $wildmeowth-hover-color2;
+    padding: 0em 0.4em;
+    background: white;
+    min-height: 28px;
+    font-size: 14px;
+}
+
+.page-container a {
+    color: #337ab7;
+  }
+  .page-container a:hover,
+  .page-container a:focus {
+    color: $wildmeowth-hover-color2;
+  }
+  .page-container h1,
+  .page-container h2,
+  .page-container h3,
+  .page-container h4,
+  .page-container h5,
+  .page-container h6 {
+    margin: 50px 0 20px;
+    line-height: 1.4;
+  }
+  .page-container h1 + p,
+  .page-container h2 + p,
+  .page-container h3 + p,
+  .page-container h4 + p,
+  .page-container h5 + p,
+  .page-container h6 + p {
+    margin-top: 20px;
+  }
+  .page-container h2::before {
+    content: " ";
+    display: block;
+    border-bottom: 1px solid #ececec;
+    margin-top: 44px;
+    margin-bottom: 30px;
+  }
+  .page-container h4 {
+    font-size: 22px;
+    font-weight: 700;
+    color: gray;
+  }
+  .page-container h4 + p {
+    margin-top: 10px;
+  }
+  .page-container h5,
+  .page-container h6 {
+    font-size: 20px;
+    font-weight: 700;
+    color: gray;
+  }
+  .page-container h5 + p,
+  .page-container h6 + p {
+    margin-top: 10px;
+  }
+  @media screen and (max-width: $wildmeowth-pad-width) {
+    .page-container h1 {
+      font-size: 30px;
+    }
+    .page-container h2 {
+      font-size: 22px;
+    }
+    .page-container h3 {
+      font-size: 20px;
+    }
+    .page-container h4 {
+      font-size: 19px;
+    }
+    .page-container h5,
+    .page-container h6 {
+      font-size: 18px;
+    }
+  }
+  .page-container ul,
+  .page-container ol {
+    margin-bottom: 40px;
+    margin-left: 0;
+    padding-left: 40px;
+  }
+  @media screen and (max-width: $wildmeowth-pad-width) {
+    .page-container ul,
+    .page-container ol {
+      padding-left: 30px;
+    }
+  }
+  @media screen and (max-width: $wildmeowth-phone-width) {
+    .page-container ul,
+    .page-container ol {
+      padding-left: 20px;
+    }
+  }
+  .page-container ol ol,
+  .page-container ol ul,
+  .page-container ul ol,
+  .page-container ul ul {
+    margin-bottom: 5px;
+  }
+  .page-container li p {
+    margin: 0;
+    margin-bottom: 5px;
+  }
+  .page-container li h1,
+  .page-container li h2,
+  .page-container li h3,
+  .page-container li h4,
+  .page-container li h5,
+  .page-container li h6 {
+    line-height: 2;
+    margin-top: 20px;
+  }
+  .page-container .pager li {
+    width: 48%;
+  }
+  .page-container .pager li.next {
+    float: right;
+  }
+  .page-container .pager li.previous {
+    float: left;
+  }
+  .page-container .pager li > a {
+    width: 100%;
+  }
+  .page-container .pager li > a > span {
+    color: #a3a3a3;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+  }
+  .page-container .anchorjs-link {
+    position: absolute;
+    text-decoration: none !important;
+  }
+
+  .page-container p{
+    margin: 35px 0;
+    color: #404040;
+    @media screen and (max-width: $wildmeowth-pad-width) {
+      margin: 25px 0;
+    }
+  }

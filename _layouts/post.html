@@ -2,19 +2,47 @@
 layout: default
 ---
 
-<article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
-  <header class="post-header">
-    <div class="post-meta">
-      <!--<time datetime="{{page.date | date: date_to_xmlschema}}" itemprop="datePublished" class="post-meta__date date">{{page.date | date: "%F"}}</time> &#8226; <span class="post-meta__tags tags">{{page.tags}}</span>-->
-      <time datetime="{{page.date | date: date_to_xmlschema}}" itemprop="datePublished" class="post-meta__date date">{{page.date | date: "%F"}}</time> &#8226; <span class="post-meta__tags tags">{{page.tags}}</span> &#8226; View <span id="busuanzi_value_page_pv"></span> times.
-    </div>
-    <h1 class="post-title">{{ page.title }}</h1>
-  </header>
+<div class="row"> 
+  <article class="post-container post-container--single 
+                  col-lg-8 col-lg-offset-2
+                  col-md-10 col-md-offset-1
+                  post-container" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <section class="post">
+        {% if page.type == 'orginal' or page.type == nil %}
+        <blockquote>
+        <p>
+        版权声明：本文为 @WildMeowth 的原创文章，可以转载，但请务必注明作者和出处！！！原文链接：<a href="{{page.url | prepend: site.baseurl | prepend: site.url}}">wildmeowth</a>
+        </p>
+        </blockquote>
+        {% endif %}
+      {{ content }}
+    </section>
+  </article>
 
-  <section class="post">
-    {{ content }}
-  </section>
-</article>
-
-{% include read-more.html %}
-{% include comments.html %}
+  <!-- Side Catalog Container -->
+  {% unless page.no-catalog %}
+  <div class="
+      col-lg-2 col-lg-offset-0
+      visible-lg-block
+      sidebar-container
+      catalog-container">
+      <div class="side-catalog">
+          <hr class="hidden-sm hidden-xs">
+          <h5 class="exclude">
+              <a class="catalog-toggle" href="#">CATALOG</a>
+          </h5>
+          <ul class="catalog-body"></ul>
+      </div>
+  </div>
+  {% endunless %}
+</div>
+<div class="row">
+  <div class="post-header
+                  col-lg-8 col-lg-offset-2
+                  col-md-10 col-md-offset-1">
+    {% include read-more.html %}
+    {% include comments.html %}
+    <hr class="post-list__divider full-width" />
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<section class="fetured-tags">
+    <h5><a href="{{'/tags/' | prepend: site.baseurl }}">FEATURED TAGS</a></h5>
+    <div class="tags">
+        {% capture tags %}
+        {% for tag in site.tags %}
+                <a data-sort="{{ site.posts.size | minus: tag[1].size | prepend: '0000' | slice: -4, 4 }}" 
+                    href="{{ site.baseurl }}/tags/#{{ tag[0] | url_encode }}"
+                    title="{{ tag[0] }}"
+                    class="btn-border-small"
+                    rel="{{ tag[1].size }}">{{ tag[0] }}</a>__SEPARATOR__
+        {% endfor %}
+        {% endcapture %}
+        {{ tags | split:'__SEPARATOR__' | sort }}
+    </div>
+    <hr class="post-list__divider">
+</section>

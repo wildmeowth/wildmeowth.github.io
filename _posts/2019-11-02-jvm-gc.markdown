@@ -1,0 +1,58 @@
+---
+layout: post
+title: JVM GC 垃圾收集器 （一）
+author: 野猫
+date: 2019-11-02 18:52:24.000000000 +08:00
+tags: JVM
+categories: JAVA
+---
+
+在了解JVM 的过程中，就不得不提到各代的垃圾收集器。Stop the world。
+## Serial && Serial Old
+Serial 和 Serial Old 分别作用于新生代和老年代。属于单线程，在GC时Stop the world，暂停其他线程直至收集结束。
+
+Serial作用于新生代，由于新生代的对象产生及消逝比较频繁存活少，使用标记Copy 复制算法。
+
+Serial Old 是作用于老年代存活率高， 老年代的对象使用标记整理算法。
+
+只能作用小内存(几十-几百M)，不然stop the world时间太长。
+
+## Parallel Scavenge && Parallel Old
+Parallel Scavenge 多线程并行，作用新生代，复制
+
+Parallel Old 多线程并行，作用于老年代，标记整理
+
+jdk1.8 默认
+
+适用于几百M-两三个G
+
+## ParNew && CMS
+ParNew 作用于新生代
+
+CMS 多线程并发（并发边创建边回收），作用于老年代 标记清除算法 （三色标记）
+
+    - 初始标记 慢
+    - 并发标记 快
+    - 重新标记 慢
+    - 并发清除 快
+
+```mermaid
+graph TB
+    Root A(黑)-->B（灰）-->C（白）
+```
+
+初始标记问题：
+1. 回收过程中，业务线程突然B到C引用消失，导致本次B回收没被清理（浮动垃圾）
+2. 回收过程中，业务线程突然从A指向C, B到C的引用突然消失，这时候会把有用的C给清了。大问题
+
+解决方案： 通过写屏障增量更新 
+
+但同时增量更新（incremental update）也会有隐蔽问题
+
+A中两个变量的第一个变量标完标下一个的时候stop the world回来后第一个变量指向C了，标完二变量后A变黑，D有被忽略当成垃圾了
+
+CMS这一bug在新的G1中解决
+
+CMS的 remark阶段，必须重头扫描一遍 想解决是stw由于算法bug可能耗时也长
+
+关于标记清除，复制，标记整理请看[这里](http://wildmewth.github.io/2018/03/gc-algorithm)

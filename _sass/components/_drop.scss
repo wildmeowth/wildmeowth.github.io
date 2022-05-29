@@ -1,0 +1,118 @@
+@charset "utf-8";
+*, *:before, *:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.wild__drop-content{
+  position: relative;
+}
+.wild-drop {
+  width: 5em;
+  margin-left: calc(100% - 5em);
+  font-family: pfs-bold;
+  color: #86919a;
+  text-transform: uppercase;
+  position: absolute;
+  transition: width 0.5s;
+  will-change: width;
+}
+.wild-drop .option {
+  padding: .5em;
+  cursor: pointer;
+  background-color: #485761;
+  border-radius: 2em;
+}
+.wild-drop .option:not(.active) {
+  display: none;
+  opacity: 0;
+  transform: translateY(-50%);
+}
+.wild-drop.visible {
+  -webkit-animation: bounce 1s;
+          animation: bounce 1s;
+  width: 6em;
+}
+.wild-drop.visible:before, .wild-drop.visible:after {
+  border-color: #fff;
+}
+.wild-drop.visible:before {
+  opacity: 0;
+}
+.wild-drop.visible:after {
+  opacity: 1;
+}
+.wild-drop.visible .option {
+  color: #fff;
+  display: block;
+}
+.wild-drop.opacity .option {
+  transform: translateZ(0);
+  opacity: 1;
+}
+.wild-drop.opacity .option:nth-child(0) {
+  transition: opacity 0.5s 0s, transform 0.5s 0s;
+}
+.wild-drop.opacity .option:nth-child(1) {
+  transition: opacity 0.5s 0.1s, transform 0.5s 0.1s;
+}
+.wild-drop.opacity .option:nth-child(2) {
+  transition: opacity 0.5s 0.2s, transform 0.5s 0.2s;
+}
+.wild-drop.opacity .option:nth-child(3) {
+  transition: opacity 0.5s 0.3s, transform 0.5s 0.3s;
+}
+.wild-drop.opacity .option:nth-child(4) {
+  transition: opacity 0.5s 0.4s, transform 0.5s 0.4s;
+}
+.wild-drop.opacity .option:nth-child(5) {
+  transition: opacity 0.5s 0.5s, transform 0.5s 0.5s;
+}
+.wild-drop.opacity .option:nth-child(6) {
+  transition: opacity 0.5s 0.6s, transform 0.5s 0.6s;
+}
+.wild-drop.opacity .option:nth-child(7) {
+  transition: opacity 0.5s 0.7s, transform 0.5s 0.7s;
+}
+.wild-drop.opacity .option:nth-child(8) {
+  transition: opacity 0.5s 0.8s, transform 0.5s 0.8s;
+}
+.wild-drop.opacity .option:nth-child(9) {
+  transition: opacity 0.5s 0.9s, transform 0.5s 0.9s;
+}
+.wild-drop.withBG .option {
+  transition: background-color 0.1s;
+}
+.wild-drop.withBG .option:not(.placeholder):hover {
+  background-color: #5aafee;
+}
+.wild-drop.withBG .option:not(.placeholder).active {
+  background-color: #5aafee;
+}
+.wild-drop:after, .wild-drop:before {
+  content: "";
+  position: absolute;
+  top: .6em;
+  right: .6em;
+  width: 0.5em;
+  height: 0.5em;
+  border: 0.2em solid #86919a;
+  transform: rotate(45deg);
+  transform-origin: 50% 50%;
+  transition: opacity 0.2s;
+}
+.wild-drop:before {
+  border-left: none;
+  border-top: none;
+  top: .5m;
+}
+.wild-drop:after {
+  border-right: none;
+  border-bottom: none;
+  opacity: 0;
+}
+
+.wild-hack {
+  opacity: 0;
+  transform: translateY(-50%);
+}

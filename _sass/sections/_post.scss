@@ -3,7 +3,7 @@
 // ------------------------------
 
 .post-comments {
-  border-top: 1px solid $gray-light;
+  border-top: 1px solid $wildmeowth-gray-light;
   padding: 60px 0;
 }
 
@@ -12,8 +12,20 @@
 // ------------------------------
 
 .post-meta {
-  margin: 0 0 .4em 0;
-  color: darken($gray, 2%);
+  margin: 0 0 1.5em 0;
+  color: darken($wildmeowth-gray, 2%);
+  .tags{
+    color: $wildmeowth-white;
+    background-color: $wildmeowth-blue;
+    padding: 1px 5px;
+    border-radius: 15px;
+    @media (max-width: $wildmeowth-sm-width) {
+      padding: 1px;
+    }
+  }
+  .categories{
+    background-color: $wildmeowth-gray-dark;
+  }
 }
 
   .post-meta__date {
@@ -46,13 +58,12 @@
   img {
     max-width: 100%;
     margin: 0 auto;
-    border-radius: $border-radius;
+    border-radius: $wildmeowth-border-radius;
     text-align: center;
     display: block;
   }
 
   pre {
-    width: 95%;
     overflow: auto;
   }
 
@@ -60,7 +71,7 @@
     display: block;
     width: 30%;
     margin: 2em 0;
-    border-top: 1px solid $gray-light;
+    border-top: 1px solid $wildmeowth-gray-light;
   }
 
 }
