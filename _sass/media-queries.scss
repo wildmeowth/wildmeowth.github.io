@@ -168,12 +168,7 @@
 
 }
 
-// ------------------------------
-// < 340px
-// ------------------------------
-
-@media all and (max-width: 340px) {
-
+@media all and (max-width: $wildmeowth-phone-width) {
   .panel-main__inner {
     padding: 0 5%;
   }
@@ -186,15 +181,6 @@
   .panel-subtitle {
     font-size: .9em;
   }
-
-  .btn {
-    display: block;
-    margin-bottom: .4em;
-  }
-
-}
-
-@media all and (max-width: $wildmeowth-phone-width) {
   .panel-cover{
     &.panel-cover--collapsed {
       background-position: 0% 88%;

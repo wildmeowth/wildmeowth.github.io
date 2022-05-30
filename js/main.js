@@ -78,7 +78,7 @@ $(document).ready(function() {
   var collapsedPanel = function() {
     currentWidth = $('.panel-cover').width();
     var bgImage = $('.panel-cover').css('background-image');
-    var adjustHeight = currentWidth < 991 ? 'auto' : '40%';
+    var adjustHeight = currentWidth < 991 ? currentWidth < 486 ? '229' : '242' : '40%';
 
     $('.panel-cover').removeAttr('style');
     $('.panel-cover').css('background-image', bgImage);
