@@ -24,14 +24,13 @@
   <!-- Bootstrap Core CSS -->
   <link rel="stylesheet" href="/css/bootstrap.min.css">
   <link rel="stylesheet" href="/css/main.css">
-  <link href="//netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
 
   <link rel="canonical" href="http://WildMeowth.github.io/asc/">
   <link rel="alternate" type="application/rss+xml" title="Wild Meowth" href="http://WildMeowth.github.io/feed.xml">
   
   <!--站长统计-->
   <!--<meta name="google-site-verification" content="" />-->
-  <meta name="baidu-site-verification" content="" />
+  <meta name="baidu-site-verification" content="code-DEY3HgcsE7" />
 
   
   
@@ -62,9 +61,8 @@
         <img src="/assets/images/wechatQR.jpg"/>
     </div>
     
-    <span class="mobile btn-mobile-menu">
-      <i class="fa fa-list btn-mobile-menu__icon"></i>
-      <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    <span class="mobile btn-mobile-menu text-right">
+      <i class="fa icon-list btn-mobile-menu__icon"></i>
   </span>
   
     
@@ -130,7 +128,7 @@
                 
                 <li class="navigation__item"><a href="/" title="Blog" class="blog-button">博客</a></li>
                 
-                <li class="navigation__item btn-search-icon"><a class="index-search__text">搜索</a><a class="index-search__icon" href="javascript:void(0)"><i class="fa fa-search"></i></a></li>
+                <li class="navigation__item btn-search-icon"><a class="index-search__text">搜索</a><a class="index-search__icon" href="javascript:void(0)"><i class="fa icon-search"></i></a></li>
               </ul>
             </nav>
           </div>
@@ -144,7 +142,7 @@
   <!-- Github -->
   <li class="navigation__item">
     <a href="https://github.com/WildMeowth" title="@WildMeowth 的 Github" target="_blank">
-      <i class='social fa fa-github'></i>
+      <i class='social fa icon-github'></i>
       <span class="label">Github</span>
     </a>
   </li>
@@ -157,7 +155,7 @@
   <!-- RSS -->
   <li class="navigation__item">
     <a href="/feed.xml" rel="author" title="RSS" target="_blank">
-      <i class='social fa fa-rss'></i>
+      <i class='social fa icon-rss'></i>
       <span class="label">RSS</span>
     </a>
   </li>
@@ -166,7 +164,7 @@
   <!-- Email -->
   <li class="navigation__item">
     <a href="mailto:sddzok@163.com" title="Contact me">
-      <i class='social fa fa-envelope'></i>
+      <i class='social fa icon-envelope'></i>
       <span class="label">Email</span>
     </a>
   </li>
@@ -180,58 +178,20 @@
     </div>
   </div>
 </header>
-<nav class="header-navigation navbar-custom nav_default ">
-  <ul class="header-ul">
-    
-      <li class="header-item"><a href="/home/" target="_blank" title="My Prfiles">首页</a></li>
-    
-      <li class="header-item"><a href="/aboutme" target="" title="About me">关于</a></li>
-    
-    <li class="header-item"><a href="/" title="Blog" class="blog-button">博客</a></li>
-    
-    <li class="header-item btn-search-icon"><a class href="javascript:void(0)"><i class="fa fa-search"></i></a></li>
-  </ul>
-  <div class="desk__d-none"><nav class="cover-navigation navigation--social">
-  <ul class="navigation">
-
-  
-
-  
-  <!-- Github -->
-  <li class="navigation__item">
-    <a href="https://github.com/WildMeowth" title="@WildMeowth 的 Github" target="_blank">
-      <i class='social fa fa-github'></i>
-      <span class="label">Github</span>
-    </a>
-  </li>
-  
-  
-  
-
-  
-
-  <!-- RSS -->
-  <li class="navigation__item">
-    <a href="/feed.xml" rel="author" title="RSS" target="_blank">
-      <i class='social fa fa-rss'></i>
-      <span class="label">RSS</span>
-    </a>
-  </li>
-
-  
-  <!-- Email -->
-  <li class="navigation__item">
-    <a href="mailto:sddzok@163.com" title="Contact me">
-      <i class='social fa fa-envelope'></i>
-      <span class="label">Email</span>
-    </a>
-  </li>
-  
-
-  </ul>
-</nav>
+<div class="header-navigationdiv">
+  <nav class="header-navigation navbar-custom nav_default ">
+    <ul class="header-ul">
+      
+        <li class="header-item"><a href="/home/" target="_blank" title="My Prfiles">首页</a></li>
+      
+        <li class="header-item"><a href="/aboutme" target="" title="About me">关于</a></li>
+      
+      <li class="header-item"><a href="/" title="Blog" class="blog-button">博客</a></li>
+      
+      <li class="header-item btn-search-icon"><a class href="javascript:void(0)"><i class="fa icon-search"></i></a></li>
+    </ul>
+  </nav>
 </div>
-</nav>
     
     
     <div class="content-wrapper ">
@@ -240,7 +200,7 @@
 <div class="search-page">
   <div class="search-icon-close-container">
     <span class="search-icon-close">
-      <i class="fa fa-chevron-down"></i>
+      <i class="fa icon-chevron-down"></i>
     </span>
   </div>
   <div class="search-main container">
@@ -320,7 +280,7 @@
       <li>
         <a class="post-content" href="/2017/08/portlet-data-transfer/" title="访问 Websphere portlet间数据传递">
           <h2 class="post-list__post-title post-title">Websphere portlet间数据传递</h2>
-          <p class="excerpt">摘要本文主要介绍IBM Websphere Portal中多个portlet间的数据交互. 本文仅介绍其中两种.正文1.共享呈现参数对于共享呈现参数需要在 portlet.xml 部署文件中的&lt;portlet-app&gt;中使用 &lt;public-render-parameter&gt; 标签.For example:123456789101112131415&lt;portlet-app ...&gt;    &lt;portlet&gt;        &lt;portle...&hellip;</p>
+          <p class="excerpt">摘要本文主要介绍IBM Websphere Portal中多个portlet间的数据交互. 本文仅介绍其中两种.正文1.共享呈现参数对于共享呈现参数需要在 portlet.xml 部署文件中的&lt;portlet-app&gt;中使用 &lt;public-render-parameter&gt; 标签.For example:123456789101112131415&lt;portle...&hellip;</p>
         </a>
         <div class="post-list__meta"><a href="/dates/#2017"><time datetime="2017-08-09 16:43:31 +0800" class="post-list__meta--date date">2017-08-09</time></a> &#8226; <a title="类别：IBM" href="/categories/#IBM" class="post-list__meta--tags tags categories">IBM</a><a title="标签：Webshpere-Portal" href="/tags/#Webshpere-Portal" class="post-list__meta--tags tags">Webshpere-Portal</a>&nbsp;&nbsp;<a class="btn-border-small" href=/2017/08/portlet-data-transfer/>继续阅读</a></div>
         <hr class="post-list__divider" />
@@ -329,7 +289,7 @@
       <li>
         <a class="post-content" href="/2017/09/spring3mvc-Portlet-create/" title="访问 Spring Protlet MVC - 使用Spring 3 MVC创建一个基本的websphsere portlet">
           <h2 class="post-list__post-title post-title">Spring Protlet MVC - 使用Spring 3 MVC创建一个基本的websphsere portlet</h2>
-          <p class="excerpt">摘要本文主要介绍IBM Websphere Portal下使用Spring 3 MVC创建一个基本的websphsere portlet.  创建          Portal Project        jar包          下载jar包        配置          web.xml      portlet.xml      applicationContext.xml      portletname-portlet.xml        源码          代...&hellip;</p>
+          <p class="excerpt">摘要本文主要介绍IBM Websphere Portal下使用Spring 3 MVC创建一个基本的websphsere portlet.  创建          Portal Project        jar包          下载jar包        配置          web.xml      portlet.xml      applicationContext.xml...&hellip;</p>
         </a>
         <div class="post-list__meta"><a href="/dates/#2017"><time datetime="2017-09-25 13:58:12 +0800" class="post-list__meta--date date">2017-09-25</time></a> &#8226; <a title="类别：IBM" href="/categories/#IBM" class="post-list__meta--tags tags categories">IBM</a><a title="标签：Webshpere-Portal" href="/tags/#Webshpere-Portal" class="post-list__meta--tags tags">Webshpere-Portal</a>&nbsp;&nbsp;<a class="btn-border-small" href=/2017/09/spring3mvc-Portlet-create/>继续阅读</a></div>
         <hr class="post-list__divider" />
@@ -338,7 +298,7 @@
       <li>
         <a class="post-content" href="/2017/11/callable-future/" title="访问 Callable + Future 线程异步">
           <h2 class="post-list__post-title post-title">Callable + Future 线程异步</h2>
-          <p class="excerpt">Callable 接口和Runnable 接口相似, 但两者也有很关键的区别. Callable 可以返回结果, Runnable 不会返回结果. 因此相对来说Callable功能更加强大.和Runnable的run() 方法类似, Callable有一个Call() 方法, 我们可以先创建一个新的Callable, 然后使用Callable的 call() 方法, 得到返回的结果.123456789101112131415public static void main(String[] ...&hellip;</p>
+          <p class="excerpt">Callable 接口和Runnable 接口相似, 但两者也有很关键的区别. Callable 可以返回结果, Runnable 不会返回结果. 因此相对来说Callable功能更加强大.和Runnable的run() 方法类似, Callable有一个Call() 方法, 我们可以先创建一个新的Callable, 然后使用Callable的 call() 方法, 得到返回的结果.1234...&hellip;</p>
         </a>
         <div class="post-list__meta"><a href="/dates/#2017"><time datetime="2017-11-29 16:12:31 +0800" class="post-list__meta--date date">2017-11-29</time></a> &#8226; <a title="类别：JAVA" href="/categories/#JAVA" class="post-list__meta--tags tags categories">JAVA</a><a title="标签：多线程" href="/tags/#多线程" class="post-list__meta--tags tags">多线程</a>&nbsp;&nbsp;<a class="btn-border-small" href=/2017/11/callable-future/>继续阅读</a></div>
         <hr class="post-list__divider" />
@@ -347,7 +307,7 @@
       <li>
         <a class="post-content" href="/2019/11/jvm-gc/" title="访问 JVM GC 垃圾收集器 （一）">
           <h2 class="post-list__post-title post-title">JVM GC 垃圾收集器 （一）</h2>
-          <p class="excerpt">在了解JVM 的过程中，就不得不提到各代的垃圾收集器。Stop the world。Serial &amp;&amp; Serial OldSerial 和 Serial Old 分别作用于新生代和老年代。属于单线程，在GC时Stop the world，暂停其他线程直至收集结束。Serial作用于新生代，由于新生代的对象产生及消逝比较频繁存活少，使用标记Copy 复制算法。Serial Old 是作用于老年代存活率高， 老年代的对象使用标记整理算法。只能作用小内存(几十-几百M)，不然s...&hellip;</p>
+          <p class="excerpt">在了解JVM 的过程中，就不得不提到各代的垃圾收集器。Stop the world。Serial &amp;&amp; Serial OldSerial 和 Serial Old 分别作用于新生代和老年代。属于单线程，在GC时Stop the world，暂停其他线程直至收集结束。Serial作用于新生代，由于新生代的对象产生及消逝比较频繁存活少，使用标记Copy 复制算法。Serial O...&hellip;</p>
         </a>
         <div class="post-list__meta"><a href="/dates/#2019"><time datetime="2019-11-02 18:52:24 +0800" class="post-list__meta--date date">2019-11-02</time></a> &#8226; <a title="类别：JAVA" href="/categories/#JAVA" class="post-list__meta--tags tags categories">JAVA</a><a title="标签：JVM" href="/tags/#JVM" class="post-list__meta--tags tags">JVM</a>&nbsp;&nbsp;<a class="btn-border-small" href=/2019/11/jvm-gc/>继续阅读</a></div>
         <hr class="post-list__divider" />
@@ -356,7 +316,7 @@
       <li>
         <a class="post-content" href="/2020/06/oracle-block/" title="访问 记一次负载测试中出现select for update悲观锁产生的问题">
           <h2 class="post-list__post-title post-title">记一次负载测试中出现select for update悲观锁产生的问题</h2>
-          <p class="excerpt">在一次release 开发过程中, QA team 在做load test 的时候 发现许多库存预存的请求报错。db发现有 row lock 的提醒， 技术支持查看Oracle报告时发现另一个release order to dbs(订单release到dbs的系统)的接口中用到了select for update 语句以下是当时的业务逻辑  The agent CatChinaReleaseOrderAgent start aA series of tasks are executed ...&hellip;</p>
+          <p class="excerpt">在一次release 开发过程中, QA team 在做load test 的时候 发现许多库存预存的请求报错。db发现有 row lock 的提醒， 技术支持查看Oracle报告时发现另一个release order to dbs(订单release到dbs的系统)的接口中用到了select for update 语句以下是当时的业务逻辑  The agent CatChinaReleas...&hellip;</p>
         </a>
         <div class="post-list__meta"><a href="/dates/#2020"><time datetime="2020-06-02 12:43:11 +0800" class="post-list__meta--date date">2020-06-02</time></a> &#8226; <a title="类别：Database" href="/categories/#Database" class="post-list__meta--tags tags categories">Database</a><a title="标签：Oracle" href="/tags/#Oracle" class="post-list__meta--tags tags">Oracle</a>&nbsp;&nbsp;<a class="btn-border-small" href=/2020/06/oracle-block/>继续阅读</a></div>
         <hr class="post-list__divider" />
@@ -400,7 +360,7 @@
       <hr class="post-list__divider full-width desk__d-none" />
     </ol>
     <div class="col-lg-3 col-lg-offset-0 col-md-3 col-md-offset-0 col-sm-12 col-xs-12 paddingzero-mobile right-content">
-      <div class="search-icon"><a href="javascript:void(0)"><i class="fa fa-search"></i></a></div>
+      <div class="search-icon"><a href="javascript:void(0)"><i class="fa icon-search"></i></a></div>
       <section class="fetured-tags">
     <h5><a href="/tags/">FEATURED TAGS</a></h5>
     <div class="tags">
@@ -475,7 +435,7 @@
   <!-- Github -->
   <li class="navigation__item">
     <a href="https://github.com/WildMeowth" title="@WildMeowth 的 Github" target="_blank">
-      <i class='social fa fa-github'></i>
+      <i class='social fa icon-github'></i>
       <span class="label">Github</span>
     </a>
   </li>
@@ -488,7 +448,7 @@
   <!-- RSS -->
   <li class="navigation__item">
     <a href="/feed.xml" rel="author" title="RSS" target="_blank">
-      <i class='social fa fa-rss'></i>
+      <i class='social fa icon-rss'></i>
       <span class="label">RSS</span>
     </a>
   </li>
@@ -497,7 +457,7 @@
   <!-- Email -->
   <li class="navigation__item">
     <a href="mailto:sddzok@163.com" title="Contact me">
-      <i class='social fa fa-envelope'></i>
+      <i class='social fa icon-envelope'></i>
       <span class="label">Email</span>
     </a>
   </li>
@@ -514,9 +474,9 @@
     <div class="fetured-content">
         <p>
             
-            <a class="fetured-friend" href="http://evanzew.github.io/">Evan Zou</a>
+            <a class="fetured-friend" href="https://evanzew.github.io/">Evan Zou</a>
             
-            <a class="fetured-friend" href="http://jeepchenup.github.io/">阿贝 (ABei)</a>
+            <a class="fetured-friend" href="https://jeepchenup.github.io/">阿贝 (ABei)</a>
             
         </p>
     </div>
@@ -538,7 +498,7 @@
             
             <!-- Github -->
                 <a href="https://github.com/WildMeowth" title="@WildMeowth 的 Github" target="_blank">
-                    <i class='social fa fa-github'></i>
+                    <i class='social fa icon-github'></i>
                 </a>
             
 
@@ -549,14 +509,14 @@
             
             <!-- Email -->
                 <a href="mailto:sddzok@163.com" title="Contact me">
-                    <i class='social fa fa-envelope'></i>
+                    <i class='social fa icon-envelope'></i>
                 </a>
             
         </span>
     	<!-- <span class="footer__copyright">本站点采用<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享 署名-非商业性使用-相同方式共享 4.0 国际 许可协议</a></span> -->
         <span class="footer__copyright">
             Site powered by <a href="https://jekyllrb.com">Jekyll</a> & <a href="https://pages.github.com">Github Pages</a> 
-            <!-- 于 2022-05-28 生成  -->
+            <!-- 于 2022-05-31 生成  -->
             .<a class="br"><br/></a> Theme designed by <a href="https://github.com/wildmeowth"><a href="http://WildMeowth.github.io">@WildMeowth</a></a> 
              - &copy; 2022
         </span>

@@ -47,38 +47,19 @@ $(document).ready(function() {
   }
 
   $('.btn-mobile-menu__icon').click(function() {
-    if ($('.header-navigation').css('display') == "block") {
-      $('.header-navigation').on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-        $('.header-navigation').toggleClass('visible animated bounceOutUp');
-        $('.header-navigation').off('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend');
-      });
-      $('.header-navigation').toggleClass('animated bounceInDown animated bounceOutUp');
-
-    } else {
-      $('.header-navigation').toggleClass('visible animated bounceInDown');
-    }
-    $('.btn-mobile-menu__icon').toggleClass('fa fa-list fa fa-angle-up animated fadeIn');
+    $('.header-navigation').toggleClass('visible');
   });
 
   $('.header-navigation .blog-button').click(function() {
     currentWidth = $('.panel-cover').width();
     if(currentWidth<991){
-      if ($('.header-navigation').css('display') == "block") {
-        $('.header-navigation').on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-          $('.header-navigation').toggleClass('visible animated bounceOutUp');
-          $('.header-navigation').off('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend');
-        });
-  
-        $('.header-navigation').toggleClass('animated bounceInDown animated bounceOutUp');
-      }
-      
-      $('.btn-mobile-menu__icon').toggleClass('fa fa-list fa fa-angle-up animated fadeIn');
+      $('.header-navigation').toggleClass('visible');
     }
   });
   var collapsedPanel = function() {
     currentWidth = $('.panel-cover').width();
     var bgImage = $('.panel-cover').css('background-image');
-    var adjustHeight = currentWidth < 991 ? 'auto' : '40%';
+    var adjustHeight = currentWidth < 991 ? currentWidth < 486 ? '249' : '262' : '40%';
 
     $('.panel-cover').removeAttr('style');
     $('.panel-cover').css('background-image', bgImage);
