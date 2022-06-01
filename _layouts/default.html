@@ -3,21 +3,20 @@
 
   {% include head.html %}
 
-  <body>
+  <body class="{% if page.navcolor %}{{ page.navcolor }}{% endif %}">
     <div class="grey-div d-none"></div>
     <div class="subscribe-content d-none">
         <img src="/assets/images/wechatQR.jpg"/>
     </div>
     
-    <span class="mobile btn-mobile-menu">
-      <i class="fa fa-list btn-mobile-menu__icon"></i>
-      <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    <span class="mobile btn-mobile-menu text-right">
+      <i class="fa icon-list btn-mobile-menu__icon"></i>
   </span>
   
     {% if page.layout=='post' %}
       {% assign contentClass='post-content__wrapper' %}
       {% include header-menu.html %}
-        <header class="row margin-zero post__header-header {% if page.header-img %}large{% endif %} {% if page.navcolor %}{{ page.navcolor }}{% endif %}" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% endif %}'); ">
+      <header class="row margin-zero post__header-header {% if page.header-img %}large{% endif %} {% if page.navcolor %}{{ page.navcolor }}{% endif %}" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% endif %}'); ">
           {% if page.header-img %}<div class="header-mask"></div>{% endif %}
           <div class="content-wrapper {{contentClass}}">
             <div class="content-wrapper__inner">

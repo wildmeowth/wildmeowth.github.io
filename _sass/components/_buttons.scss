@@ -74,23 +74,26 @@
 
 .btn-mobile-menu {
   display: none;
-  position: fixed;
+  position: absolute;
   z-index: 9999;
   top: 0;
   right: 0;
   left: 0;
   width: 100%;
   height: 35px;
-  background: rgba($wildmeowth-gray-darkest,.98);
-  border-bottom: 1px solid rgba(255,255,255,.1);
-  text-align: center;
 }
 
 .btn-mobile-menu__icon,
 .btn-mobile-close__icon {
   position: relative;
-  top: 10px;
-  color: #FFF;
+  top: 0;
+  right: 0;
+  padding: 18px;
+  border-radius: 50%;
+  background-color: none;
+  &.focus {
+    background-color: rgba($wildmeowth-gray-light,.33);
+  }
 }
 
 .btn-mobile-search__icon {

@@ -46,39 +46,24 @@ $(document).ready(function() {
     $('.panel-cover').addClass('panel-cover--collapsed');
   }
 
-  $('.btn-mobile-menu__icon').click(function() {
-    if ($('.header-navigation').css('display') == "block") {
-      $('.header-navigation').on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-        $('.header-navigation').toggleClass('visible animated bounceOutUp');
-        $('.header-navigation').off('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend');
-      });
-      $('.header-navigation').toggleClass('animated bounceInDown animated bounceOutUp');
-
-    } else {
-      $('.header-navigation').toggleClass('visible animated bounceInDown');
-    }
-    $('.btn-mobile-menu__icon').toggleClass('fa fa-list fa fa-angle-up animated fadeIn');
+  $('.btn-mobile-menu__icon').click(function(e) {
+    e.stopPropagation();
+    $('.header-navigation').toggleClass('visible');
+    $(this).toggleClass('focus');
   });
-
-  $('.header-navigation .blog-button').click(function() {
+  
+  $('body').click(function() {
     currentWidth = $('.panel-cover').width();
     if(currentWidth<991){
-      if ($('.header-navigation').css('display') == "block") {
-        $('.header-navigation').on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-          $('.header-navigation').toggleClass('visible animated bounceOutUp');
-          $('.header-navigation').off('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend');
-        });
-  
-        $('.header-navigation').toggleClass('animated bounceInDown animated bounceOutUp');
-      }
-      
-      $('.btn-mobile-menu__icon').toggleClass('fa fa-list fa fa-angle-up animated fadeIn');
+      $('.header-navigation').removeClass('visible');
+      $('.btn-mobile-menu__icon').removeClass('focus');
     }
   });
+
   var collapsedPanel = function() {
     currentWidth = $('.panel-cover').width();
     var bgImage = $('.panel-cover').css('background-image');
-    var adjustHeight = currentWidth < 991 ? currentWidth < 486 ? '229' : '242' : '40%';
+    var adjustHeight = currentWidth < 991 ? currentWidth < 486 ? '249' : '262' : '320';
 
     $('.panel-cover').removeAttr('style');
     $('.panel-cover').css('background-image', bgImage);

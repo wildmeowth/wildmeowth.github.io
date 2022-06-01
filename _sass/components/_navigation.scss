@@ -128,43 +128,51 @@ nav {
 
 @media all and (max-width: $wildmeowth-pad-width) {
   .header-navigation{
-    &:not(.visible) {
-      display: none;
-    }
+    background: white;
+    position: absolute;
+    top: 55px;
+    right: 18px;
+    z-index: 9998;
+    width: 170px;
+    box-shadow: 0 5px 10px 2px rgba(0,0,0,.2);
+    box-shadow: rgba(0,0,0,.12) 0 1px 6px, rgba(0,0,0,.24) 0 1px 4px;
+    border-radius: 2px;
+    visibility: hidden;
+    transform-origin: 100% 0%;
+    transform: scale(0.1);
+    opacity: 0;
+    transition: 0.2s cubic-bezier(0.5, 0.1, 0.51, 1.38);
     &.visible {
-      display: block;
-      background: rgba($wildmeowth-gray-darkest,.98);
-      position: fixed;
-      top: 0;
-      z-index: 9998;
+      visibility: visible;
+      transform: scale(1);
+      opacity: 1;
       a {
-        color: white !important;
+        color: $wildmeowth-cat-gray !important;
       }
       ul{
         text-align: center;
         margin-bottom: 20px;
       }
       .header-ul {
-        margin: 40px 0 0 0;
+        margin: 10px 0 0 0;
         list-style-type: none;
-        text-align: center;
+        text-align: left;
         .header-item {
           display: block;
-          width: 80%;
           margin: 0 auto;
           margin-bottom: 0.4em;
           a {
-            border: 1px solid white;
-            padding: 10px 20px;
-            border-radius: 20px;
+            padding: 12px 15px;
             font-size: .9em;
             font-weight: bold;
             letter-spacing: 1px;
             text-shadow: none;
             -webkit-font-smoothing: antialiased;
-            color: white !important;
+            color: $wildmeowth-cat-gray !important;
             &:hover {
               color: $wildmeowth-hover-color2;
+              background-color: rgba($wildmeowth-gray-light,.8);
+              border-radius: 0;
               opacity: 1;
             }
           }

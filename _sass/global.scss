@@ -485,9 +485,15 @@ hr {
   font-size: 1em;
 }
 .invert {
-  .post-title, a, time, .post-from {
-      color: $wildmeowth-white;
-      font-weight: 700;
+  header {
+    .post-title, a, time, .post-from {
+        color: $wildmeowth-white;
+        font-weight: 700;
+    }
+  }
+  .btn-mobile-menu__icon,
+  .btn-mobile-close__icon {
+    color: #FFF;
   }
 }
 .margin-zero {
