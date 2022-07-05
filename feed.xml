@@ -5,9 +5,48 @@
     <description>嗨，我是野猫(@WildMeowth)，一名天朝的代码搬运工。现居杭州，在杭州工作。目前处于学习状态。</description>
     <link>http://WildMeowth.github.io/</link>
     <atom:link href="http://WildMeowth.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 06 Jun 2022 18:15:16 +0800</pubDate>
-    <lastBuildDate>Mon, 06 Jun 2022 18:15:16 +0800</lastBuildDate>
+    <pubDate>Tue, 05 Jul 2022 09:29:41 +0800</pubDate>
+    <lastBuildDate>Tue, 05 Jul 2022 09:29:41 +0800</lastBuildDate>
     <generator>Jekyll v4.2.2</generator>
+    
+      <item>
+        <title>有些事，想做还得做</title>
+        <description>&lt;h2 id=&quot;某天&quot;&gt;某天&lt;/h2&gt;
+
+&lt;p&gt;某天，突然想学点东西。&lt;/p&gt;
+
+&lt;p&gt;我知道，我又来了。&lt;/p&gt;
+
+&lt;p&gt;曾经我想玩滑板，想学跳舞，想弹钢琴，想潜水，想蹦极。但想来想去，现实情况总有这那的理由让进度仅在想这一步。&lt;/p&gt;
+
+&lt;p&gt;也会想，小时候没条件学，真的血亏。&lt;/p&gt;
+
+&lt;h3 id=&quot;但是&quot;&gt;但是&lt;/h3&gt;
+
+&lt;p&gt;但是，老生常谈，大家也都明白，什么时候学都不算晚。&lt;/p&gt;
+
+&lt;p&gt;我不知道是不是真的不算晚，但我想试试。&lt;/p&gt;
+
+&lt;p&gt;我想学吉他弹唱，我想哪怕未来年纪大了，我也能自弹自唱，自娱自乐，悠然自在。&lt;/p&gt;
+
+&lt;h3 id=&quot;感想&quot;&gt;感想&lt;/h3&gt;
+
+&lt;p&gt;总之，不行动就没有任何可能性，只要行动起来，总会有无限的可能性，无论结果是好亦或是坏，试一下才有可能嘛。&lt;/p&gt;
+
+&lt;p&gt;我是一个平庸的人，然而平庸的内心里也会藏有那一丝丝不妥协。希望这次的尝试能成为我未来做事的准则。&lt;/p&gt;
+</description>
+        <pubDate>Sat, 18 Jun 2022 18:18:18 +0800</pubDate>
+        <link>http://WildMeowth.github.io/2022/06/just-do-it/</link>
+        <guid isPermaLink="true">http://WildMeowth.github.io/2022/06/just-do-it/</guid>
+        
+            
+            <category>WildMeowth</category>
+          
+        
+        
+        <category>博客</category>
+        
+      </item>
     
       <item>
         <title>读《城南旧事》-『初恋』有感</title>
@@ -1514,149 +1553,6 @@ A series of tasks are executed include the &lt;code class=&quot;language-plainte
         <pubDate>Mon, 25 Sep 2017 13:58:12 +0800</pubDate>
         <link>http://WildMeowth.github.io/2017/09/spring3mvc-Portlet-create/</link>
         <guid isPermaLink="true">http://WildMeowth.github.io/2017/09/spring3mvc-Portlet-create/</guid>
-        
-            
-            <category>Webshpere-Portal</category>
-          
-        
-        
-        <category>IBM</category>
-        
-      </item>
-    
-      <item>
-        <title>Websphere portlet间数据传递</title>
-        <description>&lt;h2 id=&quot;摘要&quot;&gt;摘要&lt;/h2&gt;
-
-&lt;p&gt;本文主要介绍IBM Websphere Portal中多个portlet间的数据交互. 本文仅介绍其中两种.&lt;/p&gt;
-
-&lt;h2 id=&quot;正文&quot;&gt;正文&lt;/h2&gt;
-
-&lt;h3 id=&quot;1共享呈现参数&quot;&gt;1.共享呈现参数&lt;/h3&gt;
-
-&lt;p&gt;对于共享呈现参数需要在 portlet.xml 部署文件中的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;portlet-app&amp;gt;&lt;/code&gt;中使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;public-render-parameter&amp;gt;&lt;/code&gt; 标签.&lt;/p&gt;
-
-&lt;p&gt;For example:&lt;/p&gt;
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;portlet-app&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;portlet&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;portlet-name&amp;gt;&lt;/span&gt;Portlet A&lt;span class=&quot;nt&quot;&gt;&amp;lt;/portlet-name&amp;gt;&lt;/span&gt;
-    ...
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/portlet&amp;gt;&lt;/span&gt;
-    ...
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;public-render-parameter&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;identifier&amp;gt;&lt;/span&gt;param1&lt;span class=&quot;nt&quot;&gt;&amp;lt;/identifier&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;param1&lt;span class=&quot;nt&quot;&gt;&amp;lt;/qname&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/public-render-parameter&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;public-render-parameter&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;identifier&amp;gt;&lt;/span&gt;param2&lt;span class=&quot;nt&quot;&gt;&amp;lt;/identifier&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;param2&lt;span class=&quot;nt&quot;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/public-render-parameter&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/portlet-app&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;然后在每个 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;portlet&amp;gt;&lt;/code&gt; 中使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;supported-public-render-parameter&amp;gt;&lt;/code&gt; 标签.&lt;/p&gt;
-
-&lt;p&gt;For example:&lt;/p&gt;
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;portlet&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;portlet-name&amp;gt;&lt;/span&gt;Portlet A&lt;span class=&quot;nt&quot;&gt;&amp;lt;/portle-name&amp;gt;&lt;/span&gt;
-    ......
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;supported-public-render-parameter&amp;gt;&lt;/span&gt;param1&lt;span class=&quot;nt&quot;&gt;&amp;lt;/supported-public-render-parameter&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/portlet&amp;gt;&lt;/span&gt;    
- 
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;portlet&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;portlet-name&amp;gt;&lt;/span&gt;Portlet B&lt;span class=&quot;nt&quot;&gt;&amp;lt;/portle-name&amp;gt;&lt;/span&gt;
-    ......
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;supported-public-render-parameter&amp;gt;&lt;/span&gt;param1&lt;span class=&quot;nt&quot;&gt;&amp;lt;/supported-public-render-parameter&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/portlet&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;共享呈现参数的使用
-与非共享呈现参数的使用方法相同, 共享呈现参数可以通过 ActionResponse 的 setRenderParameter(“key”,”value”) 方法设定, 并通过 RenderRequest 的 getParameter(“key”) 来获得.&lt;/p&gt;
-
-&lt;p&gt;For example:&lt;/p&gt;
-
-&lt;p&gt;Portlet A 设定共享呈现参数&lt;/p&gt;
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;processAction&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ActionRequest&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;actionRequest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;nc&quot;&gt;ActionResponse&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;actionResponse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;PortletException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;IOException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;actionResponse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setRenderParameter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;param1&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;publicParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Portlet B 获取共享呈现参数&lt;/p&gt;
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;RenderRequest&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;renderRequest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;renderResponse&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;renderResponse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;PortletException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;IOException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
-    &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;publicValue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;renderRequest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getParameter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;param1&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;以上DONE.&lt;/p&gt;
-
-&lt;h3 id=&quot;2portletsession&quot;&gt;2.PortletSession&lt;/h3&gt;
-
-&lt;p&gt;PortletSession在应用级即PortletSession.APPLICATION_SCOPE, 可以在多个portlet间进行数据共享.&lt;/p&gt;
-
-&lt;p&gt;For example:&lt;/p&gt;
-
-&lt;p&gt;Portlet A 中：&lt;/p&gt;
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Don't worry, be happy!&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;nc&quot;&gt;PortletSession&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;session&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getPortletSession&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setAttribute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;data&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;PortletSession&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;APPLICATION_SCOPE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Portlet B 中：&lt;/p&gt;
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getPortletSession&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getAttribute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;data&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;PortletSession&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;APPLICATION_SCOPE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;以上就是在IBM websphere portal中多个portlet间的数据交互的两种方法.&lt;/p&gt;
-
-</description>
-        <pubDate>Wed, 09 Aug 2017 16:43:31 +0800</pubDate>
-        <link>http://WildMeowth.github.io/2017/08/portlet-data-transfer/</link>
-        <guid isPermaLink="true">http://WildMeowth.github.io/2017/08/portlet-data-transfer/</guid>
         
             
             <category>Webshpere-Portal</category>
