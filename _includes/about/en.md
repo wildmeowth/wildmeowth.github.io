@@ -1,12 +1,12 @@
 Hi, I am _@wildmeowth_ (Zhuohong, Miao)
 
-WAITING TO UPDATING...
+TO BE UPDATED...
 
 [TEST - HOME](https://wildmeowth.github.io/home/) 
 
 ##### [Test - My Profile](https://wildmeowth.github.io/home/)
 
-WAITING TO UPDATING...
+TO BE UPDATED...
 
 
 ##### EXTN
